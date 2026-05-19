@@ -14,7 +14,7 @@
   ],
   "kv_namespaces": [
     {
-      "binding": "EXAMTRACKER_DB",
+      "binding": "examentracker-db",
       "id": "c4f3a6f1fbc14786b8e122cd50632c78"
     }
   ]
