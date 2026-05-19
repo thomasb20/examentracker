@@ -1,7 +1,69 @@
 export default {
-  async fetch(request, env, ctx) {
-    let value = await env.examentracker-db.get("test");
+  /*
+  example data:
+  [
+    {
+      "streefcijfer": 8.5,
+      "vakken":
+      [
+        {
+          "name": "Scheikunde",
+          "se_cijfer": 7.3,
+          "oefenexamens":
+          {
+            "2020-I": [7.5, "8-12-2020"],
+            "2020-II": [8, "8-12-2020"],
+            "2021-I": [7, "8-12-2021"]
+          },
+          "weaknesses":
+          {
+            "Organische Chemie": true,
+            "Zuur-Base Evenwichten": false,
+            "Redoxreacties": true
+          }
+        },
+        {
+          "name": "Natuurkunde",
+          "se_cijfer": 7.2,
+          "oefenexamens":
+          {
+            "2020-I": [7.5, "8-12-2020"],
+            "2020-II": [8, "8-12-2020"],
+            "2021-I": [7, "8-12-2021"]
+          },
+          "weaknesses":
+          {
+            "Mechanica": true,
+            "Elektriciteit": false,
+            "Golven": true
+          }
+        }
+      ]
+    }
+  ]
+  */
 
-    return new Response(value);
-  },
-};
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/get-data" && request.method === "GET") {
+      try {
+        // Als er nog geen data is, maak dan array aan.
+        await env.EXAMTRACKER_DB.get("data");
+      }
+      catch (e) {
+        await env.EXAMTRACKER_DB.put("data", JSON.stringify([]));
+      }
+      
+      unprocessed_data = await env.EXAMTRACKER_DB.get("data");
+      data = JSON.parse(unprocessed_data);
+      return new Response(data);
+    }
+
+    else if (url.pathname === "/update-data" && request.method === "POST") {
+      const newData = await request.json();
+      await env.EXAMTRACKER_DB.put("data", JSON.stringify(newData));
+      return new Response("Opgeslagen");
+    }
+  }
+}

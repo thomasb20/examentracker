@@ -1,15 +1,16 @@
 // Examentracker index.js
 
-// Vakkenlijst
-const subjects = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];
+// TODO:
+// Invullen SE cijfer per vak
+// Streefcijfer per vak uitbereknen (gemiddelde SE cijfer + streefcijfer = 8,5)
+// invullen oefenexamens per vak met cijfer en datum
+// Cijfergrafiek. Die bestaat uit verticale staven per datum. Horizontale lijn bij streefcijfer. De staven worden gegenereerd met de cijfers van de oefenexamens. Blijf oefenen totdat je 2x  na elkaar boven je streefcijfer haalt.
+// voortgang per vak: procentuele voortgang richting streefcijfer. Later bedenken hoe deze wordt berekend.
+// totale voortgang (gemiddelde voortgang van alle vakken)
+// maken, afvinken en verwijderen zwakke punten per vak
 
-for (let i = 0; i < subjects.length; i++){
-    const subject = subjects[i];
-    const subject_list = document.getElementById("subject-list");
-    const listItem = document.createElement("li");
-    listItem.textContent = subject;
-    subject_list.appendChild(listItem);
-}
+// Constanten
+const SUBJECTS = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];
 
 // Helper functions
 function getLink(subject, site) {
@@ -23,9 +24,24 @@ function getLink(subject, site) {
     else return null;
 }
 
-// TODO:
-// Invullen SE cijfer per vak
-// Streefcijfer per vak uitbereknen (gemiddelde SE cijfer + streefcijfer = 8,5)
-// voortgang per vak
-// totale voortgang (gemiddelde voortgang van alle vakken)
-// Cijfergrafiek. Die bestaat uit een verticale lijn bij het streefcijfer van het vak. De staven worden gegenereerd met de cijfers van de oefenexamens. Blijf oefenen totdat je 2x boven je streefcijfer haalt.
+// -
+
+// Laad data
+async function getUserData(){
+      const response = await fetch('/get-data');
+      if (!response.ok) {
+        alert("Error. Refresh pagina.");
+        window.location.href = "./index.html";
+        return null;
+    }
+    return await response.json();
+}
+
+// Vakkenlijst maken
+for (let i = 0; i < SUBJECTS.length; i++){
+    const subject = SUBJECTS[i];
+    const subject_list = document.getElementById("subject-list");
+    const listItem = document.createElement("li");
+    listItem.textContent = subject;
+    subject_list.appendChild(listItem);
+}
