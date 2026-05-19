@@ -45,6 +45,7 @@ export default {
 
   async fetch(request, env) {
     const url = new URL(request.url);
+    alert("Test" + await env.examentracker_db.get("test"));
 
     if (url.pathname === "/get-data" && request.method === "GET") {
       unprocessed_data = await env.examentracker_db.get("data");
