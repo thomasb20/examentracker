@@ -34,6 +34,12 @@ async function getUserData(){
     return await response.json();
 }
 
+async function test(){
+      const response = await fetch('/test');
+    return await response.text();
+}
+test().then(data => console.log(data));
+
 async function updateSubjectData(subject, key, value) {
     const data = await getUserData();
     if (!data) return;
