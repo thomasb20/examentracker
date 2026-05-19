@@ -2,13 +2,20 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "examentracker",
   "compatibility_date": "2026-05-19",
+  "main": "src/main.js",
   "observability": {
     "enabled": true
   },
   "assets": {
-    "directory": "."
+    "directory": "./public"
   },
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "examentracker-db",
+      "id": "c4f3a6f1fbc14786b8e122cd50632c78"
+    }
   ]
 }
