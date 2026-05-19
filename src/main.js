@@ -51,9 +51,9 @@ export default {
     }
 
     if (url.pathname === "/get-data" && request.method === "GET") {
-      unprocessed_data = await env.examentracker_db.get("data");
-      data = JSON.parse(unprocessed_data);
-      return new Response(data);
+      const unprocessed_data = await env.examentracker_db.get("data");
+      const data = JSON.parse(unprocessed_data);
+      return new Response(JSON.stringify(data));
     }
 
     else if (url.pathname === "/update-data" && request.method === "POST") {
