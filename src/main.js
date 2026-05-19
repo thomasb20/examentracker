@@ -47,14 +47,6 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/get-data" && request.method === "GET") {
-      try {
-        // Als er nog geen data is, maak dan array aan.
-        await env.EXAMTRACKER_DB.get("data");
-      }
-      catch (e) {
-        await env.EXAMTRACKER_DB.put("data", JSON.stringify([]));
-      }
-      
       unprocessed_data = await env.EXAMTRACKER_DB.get("data");
       data = JSON.parse(unprocessed_data);
       return new Response(data);
