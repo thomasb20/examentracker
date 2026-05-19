@@ -47,14 +47,14 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/get-data" && request.method === "GET") {
-      unprocessed_data = await env.examentracker-db.get("data");
+      unprocessed_data = await env.examentracker_db.get("data");
       data = JSON.parse(unprocessed_data);
       return new Response(data);
     }
 
     else if (url.pathname === "/update-data" && request.method === "POST") {
       const newData = await request.json();
-      await env.examentracker-db.put("data", JSON.stringify(newData));
+      await env.examentracker_db.put("data", JSON.stringify(newData));
       return new Response("Opgeslagen");
     }
   }
