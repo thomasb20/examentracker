@@ -62,7 +62,10 @@ async function updateSubjectData(subject, key, value) {
 async function showSubjectDetails(subject) {
     document.getElementById("subject-name").textContent = subject;
     document.getElementById("subject-detail").style.display = "block";
-    const SE_GRADE = await getUserData().then(data => data[subject].se_grade);
+    const SE_GRADE = await getUserData().then(data => {
+        const subjectData = data.find(item => item.name === subject);
+        return subjectData ? subjectData.se_grade : 8.0;
+    });
     document.getElementById("se-grade").value = SE_GRADE;
     document.getElementById("se-grade").addEventListener("change", (event) => {
         const newGrade = parseFloat(event.target.value);

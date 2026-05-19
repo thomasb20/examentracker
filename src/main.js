@@ -43,6 +43,23 @@ export default {
   ]
   */
 
+/*
+Default (voor copypaste)
+{
+  "streefcijfer": 8.5,
+  "vakken": [
+    { "name": "Wiskunde B", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} },
+    { "name": "Nederlands", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} },
+    { "name": "Engels", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} },
+    { "name": "Biologie", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} },
+    { "name": "Natuurkunde", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} },
+    { "name": "Scheikunde", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} },
+    { "name": "Latijn", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} },
+    { "name": "Duits", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} }
+  ]
+}
+ */
+
   async fetch(request, env) {
     const url = new URL(request.url);
     
