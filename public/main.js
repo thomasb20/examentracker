@@ -43,7 +43,7 @@ test().then(data => console.log(data));
 async function updateSubjectData(subject, key, value) {
     const data = await getUserData();
     if (!data) return;
-    const subjectData = data.find(item => item.name === subject);
+    const subjectData = data.vakken.find(item => item.name === subject);
     if (!subjectData) {
         alert("Fout: Vak niet gevonden.");
         return;
@@ -63,7 +63,7 @@ async function showSubjectDetails(subject) {
     document.getElementById("subject-name").textContent = subject;
     document.getElementById("subject-detail").style.display = "block";
     const SE_GRADE = await getUserData().then(data => {
-        const subjectData = data.find(item => item.name === subject);
+        const subjectData = data.vakken.find(item => item.name === subject);
         return subjectData ? subjectData.se_grade : 8.0;
     });
     document.getElementById("se-grade").value = SE_GRADE;
