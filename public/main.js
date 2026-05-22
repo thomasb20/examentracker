@@ -115,6 +115,48 @@ async function showSubjectDetails(subject) {
             examList.appendChild(listItem);
         }
     }
+
+    // Zwakke punten: checkbox, tekst en verwijderknop
+    const weaknessesList = document.getElementById("weaknesses-list");
+    weaknessesList.innerHTML = "";
+    if (subjectData && subjectData.weaknesses) {
+        for (const weakness of subjectData.weaknesses) {
+            const listItem = document.createElement("li");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = weakness.selected;
+            checkbox.addEventListener("change", async () => {
+                weakness.selected = checkbox.checked;
+                await fetch('/update-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            });
+            listItem.appendChild(checkbox);
+            const text = document.createElement("span");
+            text.textContent = weakness.text;
+            listItem.appendChild(text);
+            // Verwijderknop
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Verwijder";
+            deleteButton.addEventListener("click", async () => {
+                subjectData.weaknesses = subjectData.weaknesses.filter(w => w !== weakness);
+                await fetch('/update-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                showSubjectDetails(subject);
+            });
+            listItem.appendChild(deleteButton);
+            weaknessesList.appendChild(listItem);
+        }
+    }
 }
 
 // Vakkenlijst maken
@@ -168,5 +210,36 @@ document.getElementById("exam-form").addEventListener("submit", async (event) =>
     });
     alert("Oefenexamen toegevoegd!");
     document.getElementById("exam-form").reset();
+    showSubjectDetails(subject);
+});
+
+// Zwak punt toevoegen
+document.getElementById("add-weakness").addEventListener("click", async () => {
+    const subject = document.getElementById("subject-name").textContent;
+    const weaknessText = document.getElementById("weakness-input").value.trim();
+    if (!weaknessText) {
+        alert("Fout: Zwak punt mag niet leeg zijn.");
+        return;
+    }
+    const data = await getUserData();
+    if (!data) return;
+    const subjectData = data.vakken.find(item => item.name === subject);
+    if (!subjectData) {
+        alert("Fout: Vak niet gevonden.");
+        return;
+    }
+    if (!subjectData.weaknesses) {
+        subjectData.weaknesses = [];
+    }
+    subjectData.weaknesses.push({ text: weaknessText, selected: false });
+    await fetch('/update-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    alert("Zwak punt toegevoegd!");
+    document.getElementById("weakness-input").value = "";
     showSubjectDetails(subject);
 });
