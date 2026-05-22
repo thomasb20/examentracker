@@ -120,6 +120,9 @@ async function showSubjectDetails(subject) {
     const weaknessesList = document.getElementById("weaknesses-list");
     weaknessesList.innerHTML = "";
     if (subjectData && subjectData.weaknesses) {
+        if (!Array.isArray(subjectData.weaknesses)) {
+            subjectData.weaknesses = Object.entries(subjectData.weaknesses).map(([text, selected]) => ({ text, selected }));
+        }
         for (const weakness of subjectData.weaknesses) {
             const listItem = document.createElement("li");
             const checkbox = document.createElement("input");
