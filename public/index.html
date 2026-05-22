@@ -27,7 +27,29 @@
         <input type="number" id="se-grade" min="1" max="10" step="0.1">
         <p>Streefcijfer:</p>
         <h3 id="target-grade">8.0</h3>
-</div>
+        <p>Examens:</p>
+        <form id="exam-form">
+            <select required>
+                <option value="" disabled selected>Kies een vak</option>
+                <option value="2021-I">2021-I</option>
+                <option value="2021-II">2021-II</option>
+                <option value="2022-I">2022-I</option>
+                <option value="2022-II">2022-II</option>
+                <option value="2023-I">2023-I</option>
+                <option value="2023-II">2023-II</option>
+                <option value="2024-I">2024-I</option>
+                <option value="2024-II">2024-II</option>
+                <option value="2025-I">2025-I</option>
+                <option value="2025-II">2025-II</option>
+            </select>
+            <input type="number" id="exam-grade" placeholder="Cijfer" min="1" max="10" step="0.1" required>
+            <input type="date" id="exam-date" required>
+            <button type="submit">Examen toevoegen</button>
+        </form>
+        <ul id="exam-list">
+            <!-- Hier worden de examens dynamisch toegevoegd -->
+        </ul>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>

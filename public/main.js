@@ -67,11 +67,42 @@ async function showSubjectDetails(subject) {
         return subjectData ? subjectData.se_grade : 8.0;
     });
     document.getElementById("se-grade").value = SE_GRADE;
+    let newGrade = parseFloat(document.getElementById("se-grade").value);
     document.getElementById("se-grade").addEventListener("change", (event) => {
-        const newGrade = parseFloat(event.target.value);
+        newGrade = parseFloat(event.target.value);
         updateSubjectData(subject, "se_grade", newGrade);
     });
-    document.getElementById("target-grade").value = 8.5*2 - SE_GRADE;
+    document.getElementById("target-grade").value = 8.5*2 - newGrade;
+
+    // Examenlijst
+    const examList = document.getElementById("exam-list");
+    examList.innerHTML = "";
+    const data = await getUserData();
+    const subjectData = data.vakken.find(item => item.name === subject);
+    if (subjectData && subjectData.oefenexamens) {
+        for (const [examKey, [grade, date]] of Object.entries(subjectData.oefenexamens)) {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${date}: ${grade}`;
+
+            // Verwijder knop
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Verwijder";
+            deleteButton.addEventListener("click", async () => {
+                delete subjectData.oefenexamens[examKey];
+                await fetch('/update-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                showSubjectDetails(subject);
+            });
+
+            listItem.appendChild(deleteButton);
+            examList.appendChild(listItem);
+        }
+    }
 }
 
 // Vakkenlijst maken
@@ -89,3 +120,33 @@ for (let i = 0; i < SUBJECTS.length; i++){
     listItem.appendChild(subject_details_button);
     subject_list.appendChild(listItem);
 }
+
+// Geselecteerd examen toevoegen
+document.getElementById("exam-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const subject = document.getElementById("subject-name").textContent;
+    const grade = parseFloat(document.getElementById("exam-grade").value);
+    const date = document.getElementById("exam-date").value;
+    const data = await getUserData();
+    if (!data) return;
+    const subjectData = data.vakken.find(item => item.name === subject);
+    if (!subjectData) {
+        alert("Fout: Vak niet gevonden.");
+        return;
+    }
+    if (!subjectData.oefenexamens) {
+        subjectData.oefenexamens = {};
+    }
+    const examKey = `${date}`;
+    subjectData.oefenexamens[examKey] = [grade, date];
+    await fetch('/update-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    alert("Oefenexamen toegevoegd!");
+    document.getElementById("exam-form").reset();
+    showSubjectDetails(subject);
+});
