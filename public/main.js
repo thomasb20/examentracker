@@ -82,7 +82,7 @@ async function showSubjectDetails(subject) {
     if (subjectData && subjectData.oefenexamens) {
         for (const [examKey, [grade, date]] of Object.entries(subjectData.oefenexamens)) {
             const listItem = document.createElement("li");
-            listItem.textContent = `${date}: ${grade}`;
+            listItem.textContent = `${examKey}: ${grade} (${date})`;
 
             // Verwijder knop
             const deleteButton = document.createElement("button");
@@ -127,6 +127,8 @@ document.getElementById("exam-form").addEventListener("submit", async (event) =>
     const subject = document.getElementById("subject-name").textContent;
     const grade = parseFloat(document.getElementById("exam-grade").value);
     const date = document.getElementById("exam-date").value;
+    const name = document.getElementById("exam-name").value;
+
     const data = await getUserData();
     if (!data) return;
     const subjectData = data.vakken.find(item => item.name === subject);
@@ -137,7 +139,13 @@ document.getElementById("exam-form").addEventListener("submit", async (event) =>
     if (!subjectData.oefenexamens) {
         subjectData.oefenexamens = {};
     }
-    const examKey = `${date}`;
+    // Check of examen al bestaat
+    const examKey = `${name}`;
+    if (subjectData.oefenexamens[examKey]) {
+        alert("Fout: Examen bestaat al.");
+        return;
+    }
+
     subjectData.oefenexamens[examKey] = [grade, date];
     await fetch('/update-data', {
         method: 'POST',
