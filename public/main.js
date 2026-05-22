@@ -234,6 +234,9 @@ document.getElementById("add-weakness").addEventListener("click", async () => {
     if (!subjectData.weaknesses) {
         subjectData.weaknesses = [];
     }
+    else if (!Array.isArray(subjectData.weaknesses)) {
+        subjectData.weaknesses = Object.entries(subjectData.weaknesses).map(([text, selected]) => ({ text, selected }));
+    }
     subjectData.weaknesses.push({ text: weaknessText, selected: false });
     await fetch('/update-data', {
         method: 'POST',
