@@ -60,11 +60,16 @@ Default (voor copypaste)
 }
  */
 
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     
     if (url.pathname === "/test") {
       return new Response("Test" + await env.examentracker_db.get("data"));
+    }
+
+    if (url.pathname === "/get-version") {
+      const { id: versionId, tag: versionTag, timestamp: versionTimestamp } = env.CF_VERSION_METADATA;
+      return new Response(`Version ID: ${versionId}`);
     }
 
     if (url.pathname === "/get-data" && request.method === "GET") {

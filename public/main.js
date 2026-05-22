@@ -12,6 +12,18 @@
 // Constanten
 const SUBJECTS = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];
 
+// Versie
+const versionElement = document.getElementById("version");
+fetch('/get-version')
+    .then(response => response.text())
+    .then(version => {
+        versionElement.textContent = version;
+    })
+    .catch(error => {
+        console.error('Error fetching version:', error);
+        versionElement.textContent = "Error loading version";
+    });
+
 function getLink(subject, site) {
     if (site === "alleexamens"){
     // Alle spaties met - vervangen

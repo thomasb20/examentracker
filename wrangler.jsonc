@@ -17,5 +17,8 @@
       "binding": "examentracker_db",
       "id": "c4f3a6f1fbc14786b8e122cd50632c78"
     }
-  ]
+  ],
+  "version_metadata": {
+    "binding": "CF_VERSION_METADATA"
+  }
 }
