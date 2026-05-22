@@ -69,7 +69,7 @@ Default (voor copypaste)
 
     if (url.pathname === "/get-version") {
       const { id: versionId, tag: versionTag, timestamp: versionTimestamp } = env.CF_VERSION_METADATA;
-      return new Response(`Version ID: ${versionId}`);
+      return new Response(`${versionId}`);
     }
 
     if (url.pathname === "/get-data" && request.method === "GET") {
