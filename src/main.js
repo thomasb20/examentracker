@@ -64,7 +64,7 @@ Default (voor copypaste)
     const url = new URL(request.url);
     
     if (url.pathname === "/test") {
-      return new Response("Test" + await env.examentracker_db.get("test"));
+      return new Response("Test" + await env.examentracker_db.get("data"));
     }
 
     if (url.pathname === "/get-data" && request.method === "GET") {
