@@ -449,3 +449,23 @@ document.getElementById("back-button").addEventListener("click", () => {
 });
 
 updateTotalProgress();
+
+
+// Accounts
+
+document.getElementsByClassName("login-button")[0].addEventListener("click", async () => {
+    document.getElementById("login").style.display = "block";
+    document.getElementById("select-method").style.display = "none";
+});
+document.getElementsByClassName("login-button")[1].addEventListener("click", async () => {
+    document.getElementById("login").style.display = "block";
+    document.getElementById("signup").style.display = "none";
+});
+document.getElementsByClassName("signup-button")[0].addEventListener("click", async () => {
+    document.getElementById("signup").style.display = "block";
+    document.getElementById("select-method").style.display = "none";
+});
+document.getElementsByClassName("signup-button")[1].addEventListener("click", async () => {
+    document.getElementById("signup").style.display = "block";
+    document.getElementById("login").style.display = "none";
+});
