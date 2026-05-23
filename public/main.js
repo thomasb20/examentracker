@@ -96,6 +96,7 @@ async function updateTotalProgress() {
     const progressElement = document.getElementById("total-progress");
     const percentage = ((subjectsOnTrack / totalSubjects) * 100).toFixed(1);
     progressElement.textContent = `${percentage}% van de vakken op schema (${subjectsOnTrack} van ${totalSubjects})`;
+    progressElement.style.color = percentage >= 50 ? "#2d7a3e" : "#8b4545";
 }
 
 // Cijfergrafiek genereren
@@ -235,6 +236,7 @@ function generateGradeGraph(subjectData) {
 async function showSubjectDetails(subject) {
     document.getElementById("subject-name").textContent = subject;
     document.getElementById("subject-detail").style.display = "block";
+    document.getElementById("home").style.display = "none";
 
     // Voeg oefenlinks toe
     const linksContainer = document.getElementById("links");
@@ -438,4 +440,10 @@ document.getElementById("add-weakness").addEventListener("click", async () => {
     });
     document.getElementById("weakness-input").value = "";
     showSubjectDetails(subject);
+});
+
+// Terugknop
+document.getElementById("back-button").addEventListener("click", () => {
+    document.getElementById("subject-detail").style.display = "none";
+    document.getElementById("home").style.display = "block";
 });
