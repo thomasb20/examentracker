@@ -40,6 +40,32 @@ function isLoggedIn() {
     return !!getAuthToken();
 }
 
+function authenticatedFetch(endpoint, options = {}) {
+    const token = getAuthToken();
+    const headers = {
+        'Content-Type': 'application/json',
+        ... options.headers
+    };
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(endpoint, {
+        ...options,
+        headers
+    });
+
+    // Als 401 dan is de gebruiker uitgelogd
+    if (response.status === 401) {
+        // Logout function hier later maken
+        return null;
+    }
+
+    return response;
+}
+
+// Einde helpers
+
 // Versie
 const versionElement = document.getElementById("version");
 fetch('/get-version')
