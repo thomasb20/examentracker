@@ -266,7 +266,7 @@ async function showSubjectDetails(subject) {
         newGrade = parseFloat(event.target.value);
         updateSubjectData(subject, "se_grade", newGrade);
     });
-    document.getElementById("target-grade").value = calculateTargetGrade(newGrade).toFixed(1);
+    document.getElementById("target-grade").innerHTML = calculateTargetGrade(newGrade).toFixed(1);
 
     // Examenlijst
     const examList = document.getElementById("exam-list");
