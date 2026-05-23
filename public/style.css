@@ -64,3 +64,51 @@ a {
     color: #007BFF;
     text-decoration: none;
 }
+
+/* Headers */
+
+h1 {
+    font-size: 2.5em;
+    color: var(--primary-navy);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+h2, h3 {
+    color: var(--primary-navy);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* Versie */
+.version-element {
+    background: var(--secondary-gray);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+/* Terugknop */
+#back-button {
+    background: linear-gradient(180deg, #7a92a8 0%, #5a7c8c 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+#back-button:hover {
+    background: linear-gradient(180deg, #8ba3b5 0%, #6a8c9c 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
