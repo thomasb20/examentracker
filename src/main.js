@@ -118,7 +118,7 @@ Default (voor copypaste)
         }
 
         // Hash wachtwoord
-        const hashedPassword = hashPassword(password);
+        const hashedPassword = await hashPassword(password);
 
         // Sla gebruiker op
         const user = { username, password: hashedPassword };
@@ -164,7 +164,7 @@ Default (voor copypaste)
 
         // Hash wachtwoord en vergelijk
 
-        const hashedPassword = hashPassword(password);
+        const hashedPassword = await hashPassword(password);
         if (hashedPassword !== user.password) {
           return new Response(JSON.stringify({ error: "Ongeldige gebruikersnaam of wachtwoord." }), { status: 401 });
         }
