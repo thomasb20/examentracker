@@ -67,8 +67,8 @@ async function updateTotalProgress() {
     let totalSubjects = 0;
     let subjectsOnTrack = 0;
     for (const subjectData of data.vakken) {
+        totalSubjects++;
         if (subjectData.oefenexamens && Object.keys(subjectData.oefenexamens).length > 0) {
-            totalSubjects++;
             const exams = Object.entries(subjectData.oefenexamens);
             const grades = exams.map(([name, [grade, date]]) => grade);
             const seGrade = subjectData.se_grade || 8.0;
@@ -86,12 +86,8 @@ async function updateTotalProgress() {
         }
     }
     const progressElement = document.getElementById("total-progress");
-    if (totalSubjects === 0) {
-        progressElement.textContent = "Voeg oefenexamens toe om voortgang te zien.";
-    } else {
-        const percentage = ((subjectsOnTrack / totalSubjects) * 100).toFixed(1);
-        progressElement.textContent = `${percentage}% van de vakken op schema (${subjectsOnTrack} van ${totalSubjects})`;
-    }
+    const percentage = ((subjectsOnTrack / totalSubjects) * 100).toFixed(1);
+    progressElement.textContent = `${percentage}% van de vakken op schema (${subjectsOnTrack} van ${totalSubjects})`;
 }
 
 // Cijfergrafiek genereren
@@ -399,7 +395,6 @@ document.getElementById("exam-form").addEventListener("submit", async (event) =>
         },
         body: JSON.stringify(data)
     });
-    alert("Oefenexamen toegevoegd!");
     document.getElementById("exam-form").reset();
     showSubjectDetails(subject);
 });
@@ -433,7 +428,6 @@ document.getElementById("add-weakness").addEventListener("click", async () => {
         },
         body: JSON.stringify(data)
     });
-    alert("Zwak punt toegevoegd!");
     document.getElementById("weakness-input").value = "";
     showSubjectDetails(subject);
 });
