@@ -1,9 +1,5 @@
 // Examentracker index.js
 
-// TODO:
-// voortgang per vak: procentuele voortgang richting streefcijfer. Later bedenken hoe deze wordt berekend.
-// totale voortgang (gemiddelde voortgang van alle vakken)
-
 // Constanten
 const SUBJECTS = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];
 
@@ -63,6 +59,39 @@ async function updateSubjectData(subject, key, value) {
         },
         body: JSON.stringify(data)
     });
+}
+
+async function updateTotalProgress() {
+    const data = await getUserData();
+    if (!data) return;
+    let totalSubjects = 0;
+    let subjectsOnTrack = 0;
+    for (const subjectData of data.vakken) {
+        if (subjectData.oefenexamens && Object.keys(subjectData.oefenexamens).length > 0) {
+            totalSubjects++;
+            const exams = Object.entries(subjectData.oefenexamens);
+            const grades = exams.map(([name, [grade, date]]) => grade);
+            const seGrade = subjectData.se_grade || 8.0;
+            const targetGrade = 8.5 * 2 - seGrade;
+            let isOnTrack = false;
+            for (let i = 1; i < grades.length; i++) {
+                if (grades[i] >= targetGrade && grades[i - 1] >= targetGrade) {
+                    isOnTrack = true;
+                    break;
+                }
+            }
+            if (isOnTrack) {
+                subjectsOnTrack++;
+            }
+        }
+    }
+    const progressElement = document.getElementById("total-progress");
+    if (totalSubjects === 0) {
+        progressElement.textContent = "Voeg oefenexamens toe om voortgang te zien.";
+    } else {
+        const percentage = ((subjectsOnTrack / totalSubjects) * 100).toFixed(1);
+        progressElement.textContent = `${percentage}% van de vakken op schema (${subjectsOnTrack} van ${totalSubjects})`;
+    }
 }
 
 // Cijfergrafiek genereren
@@ -187,6 +216,15 @@ function generateGradeGraph(subjectData) {
             }
         ]
     });
+
+    isTwiceTarget = false;
+    for (let i = 1; i < sortedGrades.length; i++) {
+        if (sortedGrades[i] >= targetGrade && sortedGrades[i - 1] >= targetGrade) {
+            isTwiceTarget = true;
+            break;
+        }
+    }
+    return isTwiceTarget;
 }
 
 // Vak details
@@ -301,7 +339,15 @@ async function showSubjectDetails(subject) {
         }
     }
 
-    generateGradeGraph(subjectData);
+    progressElement = document.getElementById("progress");
+    isTwiceTarget = generateGradeGraph(subjectData);
+    if (isTwiceTarget) {
+        progressElement.textContent = "Ja, goed bezig!";
+    }
+    else{
+        progressElement.textContent = "Nee, haal twee keer het streefcijfer om zeker te zijn van slagen.";
+    }
+    updateTotalProgress();
 }
 
 // Vakkenlijst maken
