@@ -66,6 +66,110 @@ async function updateSubjectData(subject, key, value) {
     });
 }
 
+// Cijfergrafiek genereren
+function generateGradeGraph(subjectData) {
+    const graphContainer = document.getElementById("grade-graph");
+    graphContainer.innerHTML = "";
+    
+    if (!subjectData || !subjectData.oefenexamens || Object.keys(subjectData.oefenexamens).length === 0) {
+        graphContainer.innerHTML = "<p>Geen oefenexamens beschikbaar.</p>";
+        return;
+    }
+    
+    // Data voorbereiden
+    const exams = Object.entries(subjectData.oefenexamens);
+    const labels = exams.map(([name, [grade, date]]) => date);
+    const grades = exams.map(([name, [grade, date]]) => grade);
+    
+    // Streefcijfer berekenen
+    const seGrade = subjectData.se_grade || 8.0;
+    const targetGrade = 8.5 * 2 - seGrade;
+    
+    // Canvas-element aanmaken
+    const canvas = document.createElement("canvas");
+    canvas.id = "gradeChart";
+    graphContainer.appendChild(canvas);
+    
+    // Chart.js maken
+    const ctx = canvas.getContext("2d");
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Cijfer",
+                    data: grades,
+                    backgroundColor: "rgba(75, 192, 192, 0.7)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 2,
+                    yAxisID: "y"
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "top"
+                },
+                title: {
+                    display: true,
+                    text: "Cijfergrafiek"
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 10,
+                    title: {
+                        display: true,
+                        text: "Cijfer"
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: "Datum"
+                    }
+                }
+            }
+        },
+        plugins: [
+            {
+                id: "targetGradeLine",
+                afterDatasetsDraw(chart) {
+                    const { ctx, chartArea, scales } = chart;
+                    const yScale = scales.y;
+                    
+                    // Bereken positie van streefcijfer lijn
+                    const yPixel = yScale.getPixelForValue(targetGrade);
+                    
+                    // Teken lijn
+                    ctx.save();
+                    ctx.strokeStyle = "rgba(255, 99, 132, 1)";
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]); // Dashed line
+                    ctx.beginPath();
+                    ctx.moveTo(chartArea.left, yPixel);
+                    ctx.lineTo(chartArea.right, yPixel);
+                    ctx.stroke();
+                    ctx.restore();
+                    
+                    // Teken label voor streefcijfer
+                    ctx.save();
+                    ctx.fillStyle = "rgba(255, 99, 132, 1)";
+                    ctx.font = "12px 'Segoe UI'";
+                    ctx.fillText(`Streefcijfer: ${targetGrade.toFixed(1)}`, chartArea.left + 5, yPixel - 5);
+                    ctx.restore();
+                }
+            }
+        ]
+    });
+}
+
 // Vak details
 async function showSubjectDetails(subject) {
     document.getElementById("subject-name").textContent = subject;
@@ -177,6 +281,8 @@ async function showSubjectDetails(subject) {
             weaknessesList.appendChild(listItem);
         }
     }
+
+    generateGradeGraph(subjectData);
 }
 
 // Vakkenlijst maken
