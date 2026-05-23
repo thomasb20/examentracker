@@ -3,6 +3,14 @@
 // Constanten
 const SUBJECTS = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];
 
+function calculateTargetGrade(seGrade) {
+    let target = (8.0 * 2 - seGrade + 0.5);
+    if (target > 10) {
+        target = 10;
+    }
+    return target;
+}
+
 // Versie
 const versionElement = document.getElementById("version");
 fetch('/get-version')
@@ -72,7 +80,7 @@ async function updateTotalProgress() {
             const exams = Object.entries(subjectData.oefenexamens);
             const grades = exams.map(([name, [grade, date]]) => grade);
             const seGrade = subjectData.se_grade || 8.0;
-            const targetGrade = (8.5 / 2 + seGrade / 2);
+            const targetGrade = calculateTargetGrade(seGrade);
             let isOnTrack = false;
             for (let i = 1; i < grades.length; i++) {
                 if (grades[i] >= targetGrade && grades[i - 1] >= targetGrade) {
@@ -111,7 +119,7 @@ function generateGradeGraph(subjectData) {
     
     // Streefcijfer berekenen
     const seGrade = subjectData.se_grade || 8.0;
-    const targetGrade = 8.5 / 2 + seGrade / 2;
+    const targetGrade = calculateTargetGrade(seGrade);
 
     // Kleur bepalen
     function getBarColor(grade, target){
@@ -258,7 +266,7 @@ async function showSubjectDetails(subject) {
         newGrade = parseFloat(event.target.value);
         updateSubjectData(subject, "se_grade", newGrade);
     });
-    document.getElementById("target-grade").value = (8.5 / 2 + newGrade / 2).toFixed(1);
+    document.getElementById("target-grade").value = calculateTargetGrade(newGrade).toFixed(1);
 
     // Examenlijst
     const examList = document.getElementById("exam-list");
