@@ -1,13 +1,9 @@
 // Examentracker index.js
 
 // TODO:
-// Invullen SE cijfer per vak
-// Streefcijfer per vak uitbereknen ((SE cijfer + streefcijfer) / 2 = 8,5)
-// invullen oefenexamens per vak met cijfer en datum
 // Cijfergrafiek. Die bestaat uit verticale staven per datum. Horizontale lijn bij streefcijfer. De staven worden gegenereerd met de cijfers van de oefenexamens. Blijf oefenen totdat je 2x  na elkaar boven je streefcijfer haalt.
 // voortgang per vak: procentuele voortgang richting streefcijfer. Later bedenken hoe deze wordt berekend.
 // totale voortgang (gemiddelde voortgang van alle vakken)
-// maken, afvinken en verwijderen zwakke punten per vak
 
 // Constanten
 const SUBJECTS = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];

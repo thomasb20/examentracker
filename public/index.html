@@ -12,7 +12,7 @@
         <h1>Examentracker</h1>
         <p>Version: <span id="version">Laden...</span></p>
         <p>Welkom bij de Examentracker! Hier kun je al je examens bijhouden en plannen.</p>
-        <div id="total">Totale voortgang: 0%</div>
+        <div id="total-progress">Totale voortgang: 0%</div>
         <div id="subjects">
             <h2>Vakken</h2>
             <ul id="subject-list">
@@ -24,6 +24,15 @@
     <div id="subject-detail" style="display:none;">
         <h2 id="subject-name">Vaknaam</h2>
         <p>Hier kun je de voortgang van dit vak bijhouden.</p>
+        <h3>Voortgang</h3>
+        <div id="progress">
+            <!-- Hier wordt de voortgang dynamisch weergegeven -->
+        </div>
+        <h3>Oefenen</h3>
+        <div id="links">
+            <!-- Hier worden de oefenlinks dynamisch toegevoegd -->
+        </div>
+        <h3>Invullen</h3>
         <p>SE-cijfer:</p>
         <input type="number" id="se-grade" min="1" max="10" step="0.1">
         <p>Streefcijfer:</p>
@@ -56,6 +65,9 @@
         <ul id="weaknesses-list">
             <!-- Hier worden de zwakke punten dynamisch toegevoegd -->
         </ul>
+        <div id="grade-graph">
+            <!-- Hier wordt de cijfergrafiek dynamisch gegenereerd -->
+        </div>
     </div>
     <script src="main.js"></script>
 </body>
