@@ -164,20 +164,25 @@ function showApp() {
     document.getElementById("app").style.display = "block";
     updateTotalProgress();
     initialiseSubjectList();
+    document.getElementById("welcome-message").textContent = `Welkom bij de Examentracker, ${getUsername()}! Hier kun je al je examens bijhouden en volgen.`;
 }
 
 // Einde account UI logica
 
 // Versie
-const versionElement = document.getElementById("version");
+const versionElements = document.getElementsByClassName("version");
 fetch('/get-version')
     .then(response => response.text())
     .then(version => {
-        versionElement.textContent = version;
+        for (const versionElement of versionElements) {
+            versionElement.textContent = version;
+        }
     })
     .catch(error => {
         console.error('Error fetching version:', error);
-        versionElement.textContent = "Error loading version";
+        for (const versionElement of versionElements) {
+            versionElement.textContent = "Error";
+        }
     });
 
 function getLink(subject, site) {
