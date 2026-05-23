@@ -88,6 +88,19 @@ function generateGradeGraph(subjectData) {
     // Streefcijfer berekenen
     const seGrade = subjectData.se_grade || 8.0;
     const targetGrade = 8.5 * 2 - seGrade;
+
+    // Kleur bepalen
+    function getBarColor(grade, target){
+        if (grade >= target) {
+            return "rgba(76, 216, 63, 0.7)"; // Groen
+        }
+        else if (grade >= target - 0.5) {
+            return "rgba(255, 206, 86, 0.7)"; // Geel
+        }
+        else {
+            return "rgba(255, 99, 132, 0.7)"; // Rood
+        }
+    }
     
     // Canvas-element aanmaken
     const canvas = document.createElement("canvas");
@@ -104,7 +117,10 @@ function generateGradeGraph(subjectData) {
                 {
                     label: "Cijfer",
                     data: sortedGrades,
-                    backgroundColor: "rgba(75, 192, 192, 0.7)",
+                    backgroundColor: (context) => {
+                        const value = context.dataset.data[context.dataIndex];
+                        return getBarColor(value, targetGrade);
+                    },
                     borderColor: "rgba(75, 192, 192, 1)",
                     borderWidth: 2,
                     yAxisID: "y"
