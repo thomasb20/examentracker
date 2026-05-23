@@ -3,12 +3,41 @@
 // Constanten
 const SUBJECTS = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];
 
+// Helpers
 function calculateTargetGrade(seGrade) {
     let target = (8.0 * 2 - seGrade + 0.5);
     if (target > 10) {
         target = 10;
     }
     return target;
+}
+
+function getAuthToken() {
+    return localStorage.getItem("authToken");
+}
+
+function setAuthToken(token) {
+    localStorage.setItem("authToken", token);
+}
+
+function clearAuthToken() {
+    localStorage.removeItem("authToken");
+}
+
+function getUsername() {
+    return localStorage.getItem("username");
+}
+
+function setUsername(username) {
+    localStorage.setItem("username", username);
+}
+
+function clearUsername() {
+    localStorage.removeItem("username");
+}
+
+function isLoggedIn() {
+    return !!getAuthToken();
 }
 
 // Versie
