@@ -161,7 +161,7 @@ hr {
     padding: var(--spacing-3xl);
 }
 
-#footer {
+.footer {
     text-align: center;
     padding: var(--spacing-2xl);
     border-top: 1px solid var(--accent-light);
@@ -235,6 +235,7 @@ button:active {
 
 input[type="number"],
 input[type="date"],
+input[type="password"],
 input[type="text"],
 select {
     width: 100%;
@@ -252,6 +253,7 @@ select {
 
 input[type="number"]:focus,
 input[type="date"]:focus,
+input[type="password"]:focus,
 input[type="text"]:focus,
 select:focus {
     outline: none;
