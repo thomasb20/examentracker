@@ -111,7 +111,7 @@ function generateGradeGraph(subjectData) {
     
     // Streefcijfer berekenen
     const seGrade = subjectData.se_grade || 8.0;
-    const targetGrade = (8.5 / 2 + seGrade / 2).toFixed(1);
+    const targetGrade = 8.5 / 2 + seGrade / 2;
 
     // Kleur bepalen
     function getBarColor(grade, target){

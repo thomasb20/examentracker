@@ -3,7 +3,6 @@ export default {
   example data:
   [
     {
-      "streefcijfer": 8.5,
       "vakken":
       [
         {
@@ -46,7 +45,6 @@ export default {
 /*
 Default (voor copypaste)
 {
-  "streefcijfer": 8.5,
   "vakken": [
     { "name": "Wiskunde B", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} },
     { "name": "Nederlands", "se_grade": 8.0, "oefenexamens": {}, "weaknesses": {} },
