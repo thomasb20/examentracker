@@ -80,6 +80,10 @@ function generateGradeGraph(subjectData) {
     const exams = Object.entries(subjectData.oefenexamens);
     const labels = exams.map(([name, [grade, date]]) => date);
     const grades = exams.map(([name, [grade, date]]) => grade);
+    // Cijfers sorteren op datum
+    const sortedData = exams.sort((a, b) => new Date(a[1][1]) - new Date(b[1][1]));
+    const sortedLabels = sortedData.map(([name, [grade, date]]) => date);
+    const sortedGrades = sortedData.map(([name, [grade, date]]) => grade);
     
     // Streefcijfer berekenen
     const seGrade = subjectData.se_grade || 8.0;
@@ -95,11 +99,11 @@ function generateGradeGraph(subjectData) {
     new Chart(ctx, {
         type: "bar",
         data: {
-            labels: labels,
+            labels: sortedLabels,
             datasets: [
                 {
                     label: "Cijfer",
-                    data: grades,
+                    data: sortedGrades,
                     backgroundColor: "rgba(75, 192, 192, 0.7)",
                     borderColor: "rgba(75, 192, 192, 1)",
                     borderWidth: 2,
