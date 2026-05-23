@@ -70,6 +70,27 @@ async function updateSubjectData(subject, key, value) {
 async function showSubjectDetails(subject) {
     document.getElementById("subject-name").textContent = subject;
     document.getElementById("subject-detail").style.display = "block";
+
+    // Voeg oefenlinks toe
+    const linksContainer = document.getElementById("links");
+    linksContainer.innerHTML = "";
+    const alleExamensLink = getLink(subject, "alleexamens");
+    const examenCentraalLink = getLink(subject, "examen-centraal");
+    if (alleExamensLink) {
+        const linkElement = document.createElement("a");
+        linkElement.href = alleExamensLink;
+        linkElement.textContent = "AlleExamens";
+        linkElement.target = "_blank";
+        linksContainer.appendChild(linkElement);
+    }
+    if (examenCentraalLink) {
+        const linkElement = document.createElement("a");
+        linkElement.href = examenCentraalLink;
+        linkElement.textContent = "Examen-Centraal";
+        linkElement.target = "_blank";
+        linksContainer.appendChild(linkElement);
+    }
+
     const SE_GRADE = await getUserData().then(data => {
         const subjectData = data.vakken.find(item => item.name === subject);
         return subjectData ? subjectData.se_grade : 8.0;
