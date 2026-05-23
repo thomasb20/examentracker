@@ -597,7 +597,10 @@ document.getElementById("back-button").addEventListener("click", () => {
 });
 
 // Logout knop
-document.getElementById("logout-button").addEventListener("click", logout);
+logoutButtons = document.getElementsByClassName("logout-button");
+for (const button of logoutButtons) {
+    button.addEventListener("click", logout);
+}
 
 // Initialisatie
 if (isLoggedIn()) {
