@@ -8,7 +8,31 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js voor de cijfergrafiek -->
 </head>
 <body>
-<div id="app">
+<div id="start">
+    <div id="select-method">
+        <h1>Welkom bij de Examentracker</h1>
+        <p>Kies een methode om verder te gaan:</p>
+        <button id="login-button">Inloggen</button>
+        <button id="signup-button">Registreren</button>
+    </div>
+    <div id="login" style="display:none;">
+        <h2>Inloggen</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Gebruikersnaam" required>
+            <input type="password" id="password" placeholder="Wachtwoord" required>
+            <button type="submit">Inloggen</button>
+        </form>
+    </div>
+    <div id="signup" style="display:none;">
+        <h2>Registreren</h2>
+        <form id="signup-form">
+            <input type="text" id="username" placeholder="Gebruikersnaam" required>
+            <input type="password" id="password" placeholder="Wachtwoord" required>
+            <button type="submit">Registreren</button>
+        </form>
+    </div>
+</div>
+<div id="app" style="display:none;">
     <div id="home">
         <h1>Examentracker</h1>
         <p>Welkom bij de Examentracker! Hier kun je al je examens bijhouden en plannen.</p>
