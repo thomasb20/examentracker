@@ -1,7 +1,6 @@
 // Examentracker index.js
 
 // TODO:
-// Cijfergrafiek. Die bestaat uit verticale staven per datum. X-as: datum, Y-as: cijfer. Horizontale lijn bij streefcijfer. De staven worden gegenereerd met de cijfers van de oefenexamens. Blijf oefenen totdat je 2x na elkaar boven je streefcijfer haalt.
 // voortgang per vak: procentuele voortgang richting streefcijfer. Later bedenken hoe deze wordt berekend.
 // totale voortgang (gemiddelde voortgang van alle vakken)
 
