@@ -96,6 +96,7 @@ async function updateTotalProgress() {
     const progressElement = document.getElementById("total-progress");
     const percentage = ((subjectsOnTrack / totalSubjects) * 100).toFixed(1);
     progressElement.textContent = `${percentage}% van de vakken op schema (${subjectsOnTrack} van ${totalSubjects})`;
+    progressElement.style.color = percentage >= 50 ? "#2d7a3e" : "#8b4545";
 }
 
 // Cijfergrafiek genereren

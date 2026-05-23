@@ -226,15 +226,7 @@ li:hover {
     color: var(--primary-navy);
 }
 
-/* Progress indicator styles */
-.progress-yes {
-    color: #2d7a3e;
-}
-
-.progress-no {
-    color: #8b4545;
-}
-
+/* Gedeeltes stylen */
 #subjects {
     margin: 30px 0;
 }
@@ -245,7 +237,6 @@ li:hover {
     letter-spacing: 2px;
 }
 
-/* Gedeeltes stylen */
 #home {
     padding: 30px;
 }
