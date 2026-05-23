@@ -18,8 +18,8 @@
     <div id="login" style="display:none;">
         <h2>Inloggen</h2>
         <form id="login-form">
-            <input type="text" id="username" placeholder="Gebruikersnaam" required>
-            <input type="password" id="password" placeholder="Wachtwoord" required>
+            <input type="text" id="username" placeholder="Gebruikersnaam" autocomplete="off" required>
+            <input type="password" id="password" placeholder="Wachtwoord" autocomplete="off" required>
             <button type="submit">Inloggen</button>
         </form>
         <button class="signup-button">Ga naar Registreren</button>
@@ -27,8 +27,8 @@
     <div id="signup" style="display:none;">
         <h2>Registreren</h2>
         <form id="signup-form">
-            <input type="text" id="username" placeholder="Gebruikersnaam" required>
-            <input type="password" id="password" placeholder="Wachtwoord" required>
+            <input type="text" id="username" placeholder="Gebruikersnaam" autocomplete="off" required>
+            <input type="password" id="password" placeholder="Wachtwoord" autocomplete="off" required>
             <button type="submit">Registreren</button>
         </form>
         <button class="login-button">Ga naar Inloggen</button>
@@ -63,7 +63,7 @@
         </div>
         <h3>Invullen</h3>
         <p>SE-cijfer:</p>
-        <input type="number" id="se-grade" min="1" max="10" step="0.1">
+        <input type="number" id="se-grade" min="1" max="10" step="0.1" autocomplete="off">
         <p>Streefcijfer:</p>
         <h3 id="target-grade">8.0</h3>
         <p>Examens:</p>
@@ -81,15 +81,15 @@
                 <option value="2025-I">2025-I</option>
                 <option value="2025-II">2025-II</option>
             </select>
-            <input type="number" id="exam-grade" placeholder="Cijfer" min="1" max="10" step="0.1" required>
-            <input type="date" id="exam-date" required>
+            <input type="number" id="exam-grade" placeholder="Cijfer" min="1" max="10" step="0.1" autocomplete="off" required>
+            <input type="date" id="exam-date" autocomplete="off" required>
             <button type="submit">Examen toevoegen</button>
         </form>
         <ul id="exam-list">
             <!-- Hier worden de examens dynamisch toegevoegd -->
         </ul>
         <p>Zwakke punten:</p>
-        <input type="text" id="weakness-input" placeholder="Voeg een zwak punt toe...">
+        <input type="text" id="weakness-input" placeholder="Voeg een zwak punt toe..." autocomplete="off">
         <button id="add-weakness">Toevoegen</button>
         <ul id="weaknesses-list">
             <!-- Hier worden de zwakke punten dynamisch toegevoegd -->
