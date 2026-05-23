@@ -8,10 +8,40 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js voor de cijfergrafiek -->
 </head>
 <body>
-<div id="app">
+<div id="start">
+    <div id="select-method">
+        <h1>Welkom bij de Examentracker. Hier kun je, na in te loggen, al je examens bijhouden en volgen.</h1>
+        <p>Kies een methode om verder te gaan:</p>
+        <button class="login-button">Inloggen</button>
+        <button class="signup-button">Registreren</button>
+    </div>
+    <div id="login" style="display:none;">
+        <h2>Inloggen</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Gebruikersnaam" required>
+            <input type="password" id="password" placeholder="Wachtwoord" required>
+            <button type="submit">Inloggen</button>
+        </form>
+        <button class="signup-button">Ga naar Registreren</button>
+    </div>
+    <div id="signup" style="display:none;">
+        <h2>Registreren</h2>
+        <form id="signup-form">
+            <input type="text" id="username" placeholder="Gebruikersnaam" required>
+            <input type="password" id="password" placeholder="Wachtwoord" required>
+            <button type="submit">Registreren</button>
+        </form>
+        <button class="login-button">Ga naar Inloggen</button>
+    </div>
+    <div class="footer">
+        <p>Gemaakt door Thomas.</p>
+        <span class="version-element">Versie: <span id="version">Laden...</span></span>
+    </div>
+</div>
+<div id="app" style="display:none;">
     <div id="home">
         <h1>Examentracker</h1>
-        <p>Welkom bij de Examentracker! Hier kun je al je examens bijhouden en plannen.</p>
+        <p>Welkom bij de Examentracker! Hier kun je al je examens bijhouden en volgen.</p>
         <div id="total-progress">0%</div>
         <div id="subjects">
             <h2>Vakken</h2>
@@ -68,9 +98,10 @@
             <!-- Hier wordt de cijfergrafiek dynamisch gegenereerd -->
         </div>
     </div>
-    <div id="footer">
+    <div class="footer">
         <p>Gemaakt door Thomas.</p>
         <span class="version-element">Versie: <span id="version">Laden...</span></span>
+        <button id="logout-button" style="margin-top:10px;padding:5px 15px;font-size:0.9em;">Uitloggen</button>
     </div>
 </div>
     <script src="main.js"></script>

@@ -161,7 +161,7 @@ hr {
     padding: var(--spacing-3xl);
 }
 
-#footer {
+.footer {
     text-align: center;
     padding: var(--spacing-2xl);
     border-top: 1px solid var(--accent-light);
@@ -235,6 +235,7 @@ button:active {
 
 input[type="number"],
 input[type="date"],
+input[type="password"],
 input[type="text"],
 select {
     width: 100%;
@@ -252,6 +253,7 @@ select {
 
 input[type="number"]:focus,
 input[type="date"]:focus,
+input[type="password"]:focus,
 input[type="text"]:focus,
 select:focus {
     outline: none;
@@ -461,4 +463,127 @@ canvas {
     font-size: var(--font-size-sm);
     opacity: 0.7;
     margin-left: var(--spacing-md);
+}
+
+/* ===== LOGIN UI ===== */
+
+#start {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#select-method {
+    background: var(--paper-cream);
+    border-radius: var(--radius-full);
+    padding: var(--spacing-3xl);
+    box-shadow: var(--shadow-deep),
+                var(--shadow-inset-highlight),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    text-align: center;
+    position: relative;
+}
+
+#select-method::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.02) 1px,
+            transparent 1px,
+            transparent 2px
+        );
+    pointer-events: none;
+    z-index: 1;
+    border-radius: var(--radius-full);
+}
+
+#select-method > * {
+    position: relative;
+    z-index: 2;
+}
+
+#select-method h1 {
+    margin-bottom: var(--spacing-2xl);
+}
+
+#select-method p {
+    margin-bottom: var(--spacing-2xl);
+    font-size: var(--font-size-lg);
+}
+
+#select-method button {
+    display: block;
+    width: 100%;
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-lg) var(--spacing-2xl);
+}
+
+#login,
+#signup {
+    background: var(--paper-cream);
+    border-radius: var(--radius-full);
+    padding: var(--spacing-3xl);
+    box-shadow: var(--shadow-deep),
+                var(--shadow-inset-highlight),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+#login::before,
+#signup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.02) 1px,
+            transparent 1px,
+            transparent 2px
+        );
+    pointer-events: none;
+    z-index: 1;
+    border-radius: var(--radius-full);
+}
+
+#login > *,
+#signup > * {
+    position: relative;
+    z-index: 2;
+}
+
+#login h2,
+#signup h2 {
+    margin-bottom: var(--spacing-2xl);
+}
+
+#login-form,
+#signup-form {
+    margin-bottom: var(--spacing-2xl);
+}
+
+#login-form input,
+#signup-form input {
+    display: block;
+    margin: var(--spacing-md) 0;
+}
+
+#login-form button[type="submit"],
+#signup-form button[type="submit"] {
+    width: 100%;
+    margin: var(--spacing-2xl) 0 var(--spacing-md) 0;
+}
+
+#login .signup-button,
+#signup .login-button {
+    width: 100%;
+    margin-top: var(--spacing-md);
 }

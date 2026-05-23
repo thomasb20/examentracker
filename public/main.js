@@ -3,6 +3,7 @@
 // Constanten
 const SUBJECTS = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];
 
+// Helpers
 function calculateTargetGrade(seGrade) {
     let target = (8.0 * 2 - seGrade + 0.5);
     if (target > 10) {
@@ -10,6 +11,162 @@ function calculateTargetGrade(seGrade) {
     }
     return target;
 }
+
+function getAuthToken() {
+    return localStorage.getItem("authToken");
+}
+
+function setAuthToken(token) {
+    localStorage.setItem("authToken", token);
+}
+
+function clearAuthToken() {
+    localStorage.removeItem("authToken");
+}
+
+function getUsername() {
+    return localStorage.getItem("username");
+}
+
+function setUsername(username) {
+    localStorage.setItem("username", username);
+}
+
+function clearUsername() {
+    localStorage.removeItem("username");
+}
+
+function isLoggedIn() {
+    return !!getAuthToken();
+}
+
+async function authenticatedFetch(endpoint, options = {}) {
+    const token = getAuthToken();
+    const headers = {
+        'Content-Type': 'application/json',
+        ... options.headers
+    };
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(endpoint, {
+        ...options,
+        headers
+    });
+
+    // Als 401 dan is de gebruiker uitgelogd
+    if (response.status === 401) {
+        logout();
+        return null;
+    }
+
+    return response;
+}
+
+// Einde helpers
+
+// Account UI logica
+document.getElementsByClassName("login-button")[0].addEventListener("click", () => {
+  document.getElementById("login").style.display = "block";
+  document.getElementById("select-method").style.display = "none";
+});
+
+document.getElementsByClassName("signup-button")[0].addEventListener("click", () => {
+  document.getElementById("signup").style.display = "block";
+  document.getElementById("select-method").style.display = "none";
+});
+
+document.getElementsByClassName("login-button")[1].addEventListener("click", () => {
+  document.getElementById("login").style.display = "block";
+  document.getElementById("signup").style.display = "none";
+});
+
+document.getElementsByClassName("signup-button")[1].addEventListener("click", () => {
+  document.getElementById("signup").style.display = "block";
+  document.getElementById("login").style.display = "none";
+});
+
+// Registreren
+document.getElementById("signup-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const username = document.getElementById("signup").querySelector('input[type="text"]').value;
+  const password = document.getElementById("signup").querySelector('input[type="password"]').value;
+
+  try {
+    const response = await fetch('/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+        alert("Registratie succesvol! Je kunt nu inloggen.");
+        document.getElementById("signup-form").reset();
+        document.getElementById("signup").style.display = "none";
+        document.getElementById("login").style.display = "block";
+    } else {
+        alert(`Fout: ` + (data.error || "Registratie mislukt."));
+    }
+
+  } catch (error) {
+    alert('Fout bij registratie: ' + error.message);
+  }
+});
+
+// Login
+document.getElementById("login-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const username = document.getElementById("login").querySelector('input[type="text"]').value;
+  const password = document.getElementById("login").querySelector('input[type="password"]').value;
+
+  try {
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      setAuthToken(data.token);
+      setUsername(data.username);
+      document.getElementById("login-form").reset();
+      showApp();
+    } else {
+      alert("Fout: " + (data.error || "Inloggen mislukt"));
+    }
+  } catch (error) {
+    alert("Fout bij inloggen: " + error.message);
+  }
+}); 
+
+// Uitloggen
+function logout() {
+  document.getElementById("subject-detail").style.display = "none";
+  document.getElementById("home").style.display = "block";
+  clearAuthToken();
+  clearUsername();
+  document.getElementById("start").style.display = "block";
+  document.getElementById("app").style.display = "none";
+  document.getElementById("select-method").style.display = "block";
+  document.getElementById("login").style.display = "none";
+  document.getElementById("signup").style.display = "none";
+}
+
+function showApp() {
+    document.getElementById("start").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    updateTotalProgress();
+    initialiseSubjectList();
+}
+
+// Einde account UI logica
 
 // Versie
 const versionElement = document.getElementById("version");
@@ -36,10 +193,10 @@ function getLink(subject, site) {
 
 // Laad data
 async function getUserData(){
-      const response = await fetch('/get-data');
-      if (!response.ok) {
-        alert("Error. Refresh pagina.");
-        window.location.href = "./index.html";
+      const response = await authenticatedFetch('/get-data');
+      if (!response || !response.ok) {
+        alert("Error. Log opnieuw in.");
+        logout();
         return null;
     }
     return await response.json();
@@ -60,11 +217,8 @@ async function updateSubjectData(subject, key, value) {
         return;
     }
     subjectData[key] = value;
-    await fetch('/update-data', {
+    await authenticatedFetch('/update-data', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: JSON.stringify(data)
     });
 }
@@ -285,11 +439,8 @@ async function showSubjectDetails(subject) {
             deleteButton.textContent = "Verwijder";
             deleteButton.addEventListener("click", async () => {
                 delete subjectData.oefenexamens[examKey];
-                await fetch('/update-data', {
+                await authenticatedFetch('/update-data', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
                     body: JSON.stringify(data)
                 });
                 showSubjectDetails(subject);
@@ -314,11 +465,8 @@ async function showSubjectDetails(subject) {
             checkbox.checked = weakness.selected;
             checkbox.addEventListener("change", async () => {
                 weakness.selected = checkbox.checked;
-                await fetch('/update-data', {
+                await authenticatedFetch('/update-data', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
                     body: JSON.stringify(data)
                 });
             });
@@ -331,11 +479,8 @@ async function showSubjectDetails(subject) {
             deleteButton.textContent = "Verwijder";
             deleteButton.addEventListener("click", async () => {
                 subjectData.weaknesses = subjectData.weaknesses.filter(w => w !== weakness);
-                await fetch('/update-data', {
+                await authenticatedFetch('/update-data', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
                     body: JSON.stringify(data)
                 });
                 showSubjectDetails(subject);
@@ -353,23 +498,27 @@ async function showSubjectDetails(subject) {
     else{
         progressElement.textContent = "Nee, haal twee keer het streefcijfer om zeker te zijn van slagen.";
     }
-    updateTotalProgress();
+    await updateTotalProgress();
 }
 
 // Vakkenlijst maken
-for (let i = 0; i < SUBJECTS.length; i++){
+function initialiseSubjectList() {
+  const subject_list = document.getElementById("subject-list");
+  subject_list.innerHTML = "";
+  
+  for (let i = 0; i < SUBJECTS.length; i++){
     const subject = SUBJECTS[i];
     const subject_details_button = document.createElement("button");
     subject_details_button.textContent = "Selecteer";
     subject_details_button.addEventListener("click", () => {
-        showSubjectDetails(subject);
+      showSubjectDetails(subject);
     });
 
-    const subject_list = document.getElementById("subject-list");
     const listItem = document.createElement("li");
     listItem.textContent = subject;
     listItem.appendChild(subject_details_button);
     subject_list.appendChild(listItem);
+  }
 }
 
 // Geselecteerd examen toevoegen
@@ -398,11 +547,8 @@ document.getElementById("exam-form").addEventListener("submit", async (event) =>
     }
 
     subjectData.oefenexamens[examKey] = [grade, date];
-    await fetch('/update-data', {
+    await authenticatedFetch('/update-data', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: JSON.stringify(data)
     });
     document.getElementById("exam-form").reset();
@@ -431,11 +577,8 @@ document.getElementById("add-weakness").addEventListener("click", async () => {
         subjectData.weaknesses = Object.entries(subjectData.weaknesses).map(([text, selected]) => ({ text, selected }));
     }
     subjectData.weaknesses.push({ text: weaknessText, selected: false });
-    await fetch('/update-data', {
+    await authenticatedFetch('/update-data', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: JSON.stringify(data)
     });
     document.getElementById("weakness-input").value = "";
@@ -448,4 +591,13 @@ document.getElementById("back-button").addEventListener("click", () => {
     document.getElementById("home").style.display = "block";
 });
 
-updateTotalProgress();
+// Logout knop
+document.getElementById("logout-button").addEventListener("click", logout);
+
+// Initialisatie
+if (isLoggedIn()) {
+    showApp();
+} else {
+    document.getElementById("start").style.display = "block";
+    document.getElementById("select-method").style.display = "block";
+}
