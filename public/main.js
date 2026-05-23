@@ -148,6 +148,8 @@ document.getElementById("login-form").addEventListener("submit", async (event) =
 
 // Uitloggen
 function logout() {
+  document.getElementById("subject-detail").style.display = "none";
+  document.getElementById("home").style.display = "block";
   clearAuthToken();
   clearUsername();
   document.getElementById("start").style.display = "block";
