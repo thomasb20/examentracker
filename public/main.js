@@ -23,10 +23,10 @@ fetch('/get-version')
 function getLink(subject, site) {
     if (site === "alleexamens"){
     // Alle spaties met - vervangen
-    return 'https://www.alleexamens.nl/examens/vwo/' + subject.replace(/\s/g, '-') + '/';
+    return 'https://www.alleexamens.nl/examens/VWO/' + subject.replace(/\s/g, '-') + '/';
     }
     if (site === "examen-centraal"){
-    return 'https://www.examen-centraal.nl/niveau/vwo/vak/' + subject.replace(/\s/g, '-') + '/topic';
+    return 'https://www.examen-centraal.nl/niveau/vwo/vak/' + subject.replace(/\s/g, '-').toLowerCase() + '/topic';
     }
     else return null;
 }
