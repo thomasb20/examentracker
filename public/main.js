@@ -235,6 +235,7 @@ function generateGradeGraph(subjectData) {
 async function showSubjectDetails(subject) {
     document.getElementById("subject-name").textContent = subject;
     document.getElementById("subject-detail").style.display = "block";
+    document.getElementById("home").style.display = "none";
 
     // Voeg oefenlinks toe
     const linksContainer = document.getElementById("links");
@@ -438,4 +439,10 @@ document.getElementById("add-weakness").addEventListener("click", async () => {
     });
     document.getElementById("weakness-input").value = "";
     showSubjectDetails(subject);
+});
+
+// Terugknop
+document.getElementById("back-button").addEventListener("click", () => {
+    document.getElementById("subject-detail").style.display = "none";
+    document.getElementById("home").style.display = "block";
 });
