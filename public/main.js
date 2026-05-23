@@ -161,7 +161,7 @@ function showApp() {
     document.getElementById("start").style.display = "none";
     document.getElementById("app").style.display = "block";
     updateTotalProgress();
-    initializeSubjectList();
+    initialiseSubjectList();
 }
 
 // Einde account UI logica
@@ -496,23 +496,27 @@ async function showSubjectDetails(subject) {
     else{
         progressElement.textContent = "Nee, haal twee keer het streefcijfer om zeker te zijn van slagen.";
     }
-    updateTotalProgress();
+    await updateTotalProgress();
 }
 
 // Vakkenlijst maken
-for (let i = 0; i < SUBJECTS.length; i++){
+function initialiseSubjectList() {
+  const subject_list = document.getElementById("subject-list");
+  subject_list.innerHTML = "";
+  
+  for (let i = 0; i < SUBJECTS.length; i++){
     const subject = SUBJECTS[i];
     const subject_details_button = document.createElement("button");
     subject_details_button.textContent = "Selecteer";
     subject_details_button.addEventListener("click", () => {
-        showSubjectDetails(subject);
+      showSubjectDetails(subject);
     });
 
-    const subject_list = document.getElementById("subject-list");
     const listItem = document.createElement("li");
     listItem.textContent = subject;
     listItem.appendChild(subject_details_button);
     subject_list.appendChild(listItem);
+  }
 }
 
 // Geselecteerd examen toevoegen
