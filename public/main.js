@@ -447,3 +447,5 @@ document.getElementById("back-button").addEventListener("click", () => {
     document.getElementById("subject-detail").style.display = "none";
     document.getElementById("home").style.display = "block";
 });
+
+updateTotalProgress();
