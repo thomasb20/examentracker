@@ -1,41 +1,138 @@
 /* CSS voor examentracker */
 :root {
+    /* Kleuren */
     --primary-navy: #1e3a5f;
+    --primary-navy-dark: #152a45;
     --secondary-gray: #5a7c8c;
+    --secondary-gray-light: #6a8c9c;
+    --secondary-gray-lighter: #7a92a8;
     --accent-light: #8ba3b5;
     --paper-white: #f5f4f0;
     --paper-cream: #faf9f5;
+    --error-red: #c23b3b;
+    --error-red-dark: #a02a2a;
+    --error-red-light: #d04747;
+    --white: #ffffff;
+    --link-blue: #007BFF;
+
+    /* Shadows */
     --shadow-light: 0 2px 8px rgba(30, 58, 95, 0.1);
     --shadow-medium: 0 4px 16px rgba(30, 58, 95, 0.15);
     --shadow-deep: 0 8px 24px rgba(30, 58, 95, 0.2);
+    --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+    /* Spacing */
+    --spacing-xs: 2px;
+    --spacing-sm: 8px;
+    --spacing-md: 10px;
+    --spacing-lg: 12px;
+    --spacing-xl: 15px;
+    --spacing-2xl: 20px;
+    --spacing-3xl: 30px;
+
+    /* Border radius */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-full: 12px;
+
+    /* Font */
+    --font-family: 'Segoe UI', Georgia, serif;
+    --font-size-base: 1em;
+    --font-size-sm: 0.85em;
+    --font-size-lg: 1.3em;
+    --font-size-xl: 1.6em;
+    --font-size-2xl: 1.8em;
+    --font-size-3xl: 2.5em;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(180deg, var(--primary-navy) 0%, var(--primary-navy-dark) 100%);
+    --gradient-secondary: linear-gradient(180deg, var(--secondary-gray-lighter) 0%, var(--secondary-gray) 100%);
+    --gradient-input: linear-gradient(180deg, var(--white) 0%, #f9f8f5 100%);
+    --gradient-background: linear-gradient(135deg, #e8e7e1 0%, var(--paper-white) 100%);
+    --gradient-light-bg: linear-gradient(135deg, #e8eef5 0%, #f0f5fa 100%);
+    --gradient-paper: linear-gradient(180deg, var(--white) 0%, var(--paper-white) 100%);
+    --gradient-error: linear-gradient(180deg, var(--error-red) 0%, var(--error-red-dark) 100%);
 }
 
+/* ===== BASIS ===== */
+
 * {
-    font-family: 'Segoe UI', Georgia, serif;
+    font-family: var(--font-family);
     margin: 0;
     padding: 0;
 }
 
 body {
-    background: linear-gradient(135deg, #e8e7e1 0%, #f5f4f0 100%);
+    background: var(--gradient-background);
     color: var(--primary-navy);
-    padding: 20px;
+    padding: var(--spacing-2xl);
     min-height: 100vh;
 }
+
+/* ===== TEKST ===== */
+
+h1 {
+    font-size: var(--font-size-3xl);
+    color: var(--primary-navy);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--primary-navy);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h3 {
+    font-size: var(--font-size-lg);
+    color: var(--primary-navy);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+    color: var(--primary-navy);
+}
+
+a {
+    color: var(--link-blue);
+    text-decoration: none;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent-light) 50%, transparent 100%);
+    margin: var(--spacing-2xl) 0;
+}
+
+/* ===== APP CONTAINER ===== */
 
 #app {
     max-width: 900px;
     margin: 0 auto;
     background: var(--paper-cream);
-    border-radius: 12px;
-    box-shadow: var(--shadow-deep), 
-                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-deep),
+                var(--shadow-inset-highlight),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.05);
     overflow: hidden;
     position: relative;
 }
 
-/* Overlay */
 #app::before {
     content: "";
     position: absolute;
@@ -43,7 +140,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
+    background-image:
         repeating-linear-gradient(
             0deg,
             rgba(0, 0, 0, 0.02) 1px,
@@ -59,92 +156,28 @@ body {
     z-index: 2;
 }
 
-/* Link stijl */
-a {
-    color: #007BFF;
-    text-decoration: none;
+#home,
+#subject-detail {
+    padding: var(--spacing-3xl);
 }
 
-/* Headers */
-
-h1 {
-    font-size: 2.5em;
-    color: var(--primary-navy);
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
-    margin-bottom: 10px;
-    letter-spacing: 1px;
+#footer {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    border-top: 1px solid var(--accent-light);
+    color: var(--secondary-gray);
+    font-size: var(--font-size-sm);
+    background: var(--gradient-paper);
 }
 
-h2, h3 {
-    color: var(--primary-navy);
-    border-bottom: 2px solid var(--accent-light);
-    padding-bottom: 10px;
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
-
-/* Versie */
-.version-element {
-    background: var(--secondary-gray);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.85em;
-    font-weight: bold;
-}
-
-/* Terugknop */
-#back-button {
-    background: linear-gradient(180deg, #7a92a8 0%, #5a7c8c 100%);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px 8px 0 0;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: var(--shadow-light);
-    transition: all 0.3s ease;
-    margin-bottom: 10px;
-}
-
-#back-button:hover {
-    background: linear-gradient(180deg, #8ba3b5 0%, #6a8c9c 100%);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
-}
-
-/* Input stijl */
-input[type="number"],
-input[type="date"],
-input[type="text"],
-select {
-    background: linear-gradient(180deg, #ffffff 0%, #f9f8f5 100%);
-    border: 2px solid var(--accent-light);
-    padding: 10px 12px;
-    border-radius: 6px;
-    font-size: 1em;
-    color: var(--primary-navy);
-    transition: all 0.2s ease;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-input[type="number"]:focus,
-input[type="date"]:focus,
-input[type="text"]:focus,
-select:focus {
-    outline: none;
-    border-color: var(--primary-navy);
-    box-shadow: 
-        inset 0 2px 4px rgba(0, 0, 0, 0.05),
-        0 0 0 3px rgba(30, 58, 95, 0.1);
-}
+/* ===== KNOPPEN ===== */
 
 button {
-    background: linear-gradient(180deg, var(--primary-navy) 0%, #152a45 100%);
+    background: var(--gradient-primary);
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    border-radius: var(--radius-md);
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -161,242 +194,71 @@ button:active {
     box-shadow: var(--shadow-light);
 }
 
-/* Lijst stijl */
-ul {
-    list-style: none;
+#back-button {
+    background: var(--gradient-secondary);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    margin-bottom: var(--spacing-md);
 }
 
-li {
-    background: linear-gradient(180deg, #ffffff 0%, #faf9f5 100%);
-    margin: 10px 0;
-    padding: 15px;
-    border-left: 4px solid var(--primary-navy);
-    border-radius: 4px;
-    box-shadow: var(--shadow-light);
-    transition: all 0.2s ease;
+#back-button:hover {
+    background: linear-gradient(180deg, var(--secondary-gray-light) 0%, var(--secondary-gray-lighter) 100%);
 }
 
-li:hover {
-    box-shadow: var(--shadow-medium);
-    transform: translateX(4px);
-}
-
-#subject-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#subject-list button {
-    margin-left: 15px;
-    padding: 8px 16px;
-    font-size: 0.9em;
-}
-
-
-/* Progress style */
-#total-progress {
-    background: linear-gradient(135deg, #e8eef5 0%, #f0f5fa 100%);
-    border: 2px solid var(--accent-light);
-    border-radius: 8px;
-    padding: 16px;
-    margin: 20px 0;
-    font-weight: bold;
-    color: var(--primary-navy);
-    position: relative;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05),
-                var(--shadow-light);
-}
-
-#total-progress::before {
-    content: "Voortgang:";
-    margin-right: 10px;
-    font-size: 1.2em;
-}
-
-#progress {
-    background: linear-gradient(180deg, #ffffff 0%, #f9f8f5 100%);
-    border-left: 4px solid var(--primary-navy);
-    padding: 10px 15px;
-    border-radius: 4px;
-    display: inline-block;
-    margin: 10px 0;
-    box-shadow: var(--shadow-light);
-    font-weight: bold;
-    color: var(--primary-navy);
-}
-
-/* Gedeeltes stylen */
-#subjects {
-    margin: 30px 0;
-}
-
-#subjects h2 {
-    font-size: 1.8em;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-#home {
-    padding: 30px;
-}
-
-#subject-detail {
-    padding: 30px;
-}
-
-hr {
-    border: none;
-    height: 2px;
-    background: linear-gradient(90deg, transparent 0%, var(--accent-light) 50%, transparent 100%);
-    margin: 20px 0;
-}
-
-#footer {
-    text-align: center;
-    padding: 20px;
-    border-top: 1px solid var(--accent-light);
-    color: var(--secondary-gray);
-    font-size: 0.9em;
-    background: linear-gradient(180deg, #faf9f5 0%, #f5f4f0 100%);
-}
-
-
-/* Cijfergrafiek styling */
-#grade-graph {
-    margin: 30px 0;
-    padding: 20px;
-    background: linear-gradient(180deg, #ffffff 0%, #faf9f5 100%);
-    border: 2px solid var(--accent-light);
-    border-radius: 8px;
-    box-shadow: var(--shadow-light),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-
-canvas {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Examenlijst en weaknesses styling */
-#exam-list,
-#weaknesses-list {
-    padding: 15px 0;
-}
-
-#exam-list li,
-#weaknesses-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 15px;
-    margin: 8px 0;
-    background: linear-gradient(180deg, #ffffff 0%, #faf9f5 100%);
-    border-left: 4px solid var(--secondary-gray);
-    border-radius: 4px;
-    box-shadow: var(--shadow-light);
-}
-
-#exam-list li:hover,
-#weaknesses-list li:hover {
-    box-shadow: var(--shadow-medium);
-    border-left-color: var(--primary-navy);
+#exam-form button,
+#add-weakness {
+    width: 100%;
+    margin-top: var(--spacing-xl);
 }
 
 #exam-list button,
 #weaknesses-list button {
-    padding: 6px 12px;
-    font-size: 0.85em;
-    background: linear-gradient(180deg, #c23b3b 0%, #a02a2a 100%);
-    margin-left: 10px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-sm);
+    background: var(--gradient-error);
+    margin-left: var(--spacing-xl);
 }
 
 #exam-list button:hover,
 #weaknesses-list button:hover {
-    background: linear-gradient(180deg, #d04747 0%, #b03636 100%);
+    background: linear-gradient(180deg, var(--error-red-light) 0%, var(--error-red) 100%);
 }
 
-/* Streefcijfer */
-#target-grade {
-    background: linear-gradient(135deg, #e8eef5 0%, #f0f5fa 100%);
-    border: 2px solid var(--accent-light);
-    padding: 12px 20px;
-    border-radius: 8px;
-    display: inline-block;
-    font-size: 1.6em;
-    font-weight: bold;
-    color: var(--primary-navy);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-    margin: 10px 0;
+#subject-list button {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-/* Examen input gedeelte styling */
-#exam-form {
-    background: linear-gradient(180deg, #f9f8f5 0%, #f0ede8 100%);
-    padding: 20px;
-    border-radius: 8px;
-    border: 2px solid var(--accent-light);
-    margin: 20px 0;
-    box-shadow: var(--shadow-light);
-}
+/* ===== FORM ELEMENTS ===== */
 
-#exam-form button {
-    width: 100%;
-    margin-top: 15px;
-}
-
-/* Weakness input section */
-#weakness-input {
-    width: 100%;
-    box-sizing: border-box;
-    margin: 10px 0;
-}
-
-#add-weakness {
-    width: 100%;
-    margin-top: 10px;
-}
-
-/* Links container */
-#links {
-    display: flex;
-    gap: 12px;
-    margin: 15px 0;
-    flex-wrap: wrap;
-}
-
-#links a {
-    background: linear-gradient(180deg, var(--secondary-gray) 0%, #4a6c7c 100%);
-    color: white;
-    padding: 10px 16px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-light);
-}
-
-#links a:hover {
-    background: linear-gradient(180deg, #6a8c9c 0%, #5a7c8c 100%);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
-}
-
-/* Text styling */
-p {
-    line-height: 1.6;
-    margin-bottom: 12px;
-    color: var(--primary-navy);
-}
-
-/* Form input styling verbeteren */
 input[type="number"],
 input[type="date"],
 input[type="text"],
 select {
     width: 100%;
     box-sizing: border-box;
-    margin: 8px 0;
+    background: var(--gradient-input);
+    border: 2px solid var(--accent-light);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    color: var(--primary-navy);
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-inset);
+    margin: var(--spacing-sm) 0;
+}
+
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-navy);
+    box-shadow:
+        var(--shadow-inset),
+        0 0 0 3px rgba(30, 58, 95, 0.1);
 }
 
 select {
@@ -410,37 +272,50 @@ select {
     padding-right: 40px;
 }
 
-/* Checkbox styling bij weaknesses */
 input[type="checkbox"] {
     width: 20px;
     height: 20px;
-    margin-right: 10px;
+    margin-right: var(--spacing-xl);
     cursor: pointer;
     accent-color: var(--primary-navy);
 }
 
-/* Text naast checkbox */
-#weaknesses-list span {
-    flex: 1;
-    color: var(--primary-navy);
+#weakness-input {
+    width: 100%;
+    box-sizing: border-box;
+    margin: var(--spacing-md) 0;
 }
 
-h3 {
-    font-size: 1.3em;
-    margin-top: 25px;
-    margin-bottom: 15px;
-}
-
-/* Container bij main */
-#subjects {
-    background: linear-gradient(180deg, #ffffff 0%, #faf9f5 100%);
-    padding: 20px;
-    border-radius: 8px;
+#exam-form {
+    background: linear-gradient(180deg, #f9f8f5 0%, #f0ede8 100%);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--accent-light);
+    margin: var(--spacing-2xl) 0;
     box-shadow: var(--shadow-light);
-    margin: 20px 0;
 }
 
-/* Vakkenlijst verbeteren */
+/* ===== LIJSTEN ===== */
+
+ul {
+    list-style: none;
+}
+
+li {
+    background: var(--gradient-paper);
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-xl);
+    border-left: 4px solid var(--primary-navy);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-light);
+    transition: all 0.2s ease;
+}
+
+li:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateX(4px);
+}
+
 #subject-list {
     padding: 0;
 }
@@ -449,12 +324,143 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-xl);
 }
 
-#subject-list button {
-    padding: 8px 16px;
-    font-size: 0.9em;
-    white-space: nowrap;
-    flex-shrink: 0;
+#exam-list,
+#weaknesses-list {
+    padding: var(--spacing-xl) 0;
+}
+
+#exam-list li,
+#weaknesses-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    margin: var(--spacing-sm) 0;
+    background: var(--gradient-paper);
+    border-left: 4px solid var(--secondary-gray);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-light);
+}
+
+#exam-list li:hover,
+#weaknesses-list li:hover {
+    box-shadow: var(--shadow-medium);
+    border-left-color: var(--primary-navy);
+}
+
+#weaknesses-list span {
+    flex: 1;
+    color: var(--primary-navy);
+}
+
+/* ===== VAKKENGEDEELTE ===== */
+
+#subjects {
+    background: var(--gradient-paper);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-light);
+    margin: var(--spacing-2xl) 0;
+}
+
+/* ===== VOORTGANG & CIJFERGRAFIEK ===== */
+
+#total-progress {
+    background: var(--gradient-light-bg);
+    border: 2px solid var(--accent-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-2xl) 0;
+    font-weight: bold;
+    color: var(--primary-navy);
+    position: relative;
+    box-shadow: var(--shadow-inset),
+                var(--shadow-light);
+}
+
+#total-progress::before {
+    content: "Voortgang:";
+    margin-right: var(--spacing-md);
+    font-size: 1.2em;
+}
+
+#progress {
+    background: var(--gradient-paper);
+    border-left: 4px solid var(--primary-navy);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    margin: var(--spacing-md) 0;
+    box-shadow: var(--shadow-light);
+    font-weight: bold;
+    color: var(--primary-navy);
+}
+
+#target-grade {
+    background: var(--gradient-light-bg);
+    border: 2px solid var(--accent-light);
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    border-radius: var(--radius-lg);
+    display: inline-block;
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    color: var(--primary-navy);
+    box-shadow: var(--shadow-inset);
+    margin: var(--spacing-md) 0;
+}
+
+#grade-graph {
+    margin: var(--spacing-3xl) 0;
+    padding: var(--spacing-2xl);
+    background: var(--gradient-paper);
+    border: 2px solid var(--accent-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-light),
+                var(--shadow-inset-highlight);
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===== LINKS ===== */
+
+#links {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+    flex-wrap: wrap;
+}
+
+#links a {
+    background: var(--gradient-secondary);
+    color: white;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-light);
+}
+
+#links a:hover {
+    background: linear-gradient(180deg, var(--secondary-gray-light) 0%, var(--secondary-gray-lighter) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* ===== VERSIE ===== */
+
+.version-element {
+    background: var(--secondary-gray);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: bold;
 }
