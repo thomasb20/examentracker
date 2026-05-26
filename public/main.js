@@ -2,6 +2,7 @@
 
 // Constanten
 const SUBJECTS = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];
+const ROOT_ELEMENT = document.querySelector(':root'); // Root element: hiermee kunnen we CSS-variabelen aanpassen.
 
 // Helpers
 function calculateTargetGrade(seGrade) {
@@ -62,6 +63,12 @@ async function authenticatedFetch(endpoint, options = {}) {
     }
 
     return response;
+}
+
+// CSS-variabele aanpassen
+function changeStyleVar(variable, value) {
+  console.log(`CSS variabele ${variable} aangepast naar ${value}.`);
+  ROOT_ELEMENT.style.setProperty(variable, value);
 }
 
 // Einde helpers
@@ -323,7 +330,7 @@ function generateGradeGraph(subjectData) {
             responsive: true,
             plugins: {
                 legend: {
-                    display: true,
+                    display: false,
                     position: "top"
                 },
                 title: {
@@ -601,6 +608,72 @@ logoutButtons = document.getElementsByClassName("logout-button");
 for (const button of logoutButtons) {
     button.addEventListener("click", logout);
 }
+
+// Settings
+// Settings menu openen
+document.getElementById("settings-button").addEventListener("click", () => {
+    document.getElementById("settings-overlay").style.display = "block";
+    document.getElementById("settings-button").style.display = "none";
+});
+
+// Settings menu sluiten
+document.getElementById("close-settings").addEventListener("click", () => {
+    document.getElementById("settings-overlay").style.display = "none";
+    document.getElementById("settings-button").style.display = "block";
+});
+
+// Primaire kleur veranderen
+document.getElementById("primary-color-select").addEventListener("change", (event) => {
+    const color = event.target.value;
+    if (color === "blue") {
+        changeStyleVar("--primary-color", "#1e3a5f");
+        changeStyleVar("--primary-color-dark", "#152a45");
+    }
+    if (color === "gray") {
+        changeStyleVar("--primary-color", "#5a7c8c");
+        changeStyleVar("--primary-color-dark", "#4a6c7c");
+    }
+    if (color === "black") {
+        changeStyleVar("--primary-color", "#383636");
+        changeStyleVar("--primary-color-dark", "#000000");
+    }
+});
+
+// Secundaire kleur veranderen
+document.getElementById("secondary-color-select").addEventListener("change", (event) => {
+    const color = event.target.value;
+    if (color === "gray") {
+        changeStyleVar("--secondary-color", "#5a7c8c");
+        changeStyleVar("--secondary-color-light", "#6a8c9c");
+        changeStyleVar("--secondary-color-lighter", "#7a92a8");
+    }
+    if (color === "blue") {
+        changeStyleVar("--secondary-color", "#1e3a5f");
+        changeStyleVar("--secondary-color-light", "#2e4a6f");
+        changeStyleVar("--secondary-color-lighter", "#3e5a7f");
+    }
+    if (color === "green") {
+        changeStyleVar("--secondary-color", "#2d7a3e");
+        changeStyleVar("--secondary-color-light", "#3d8a4e");
+        changeStyleVar("--secondary-color-lighter", "#4d9a5e");
+    }
+});
+
+// Link kleur veranderen
+document.getElementById("link-color-select").addEventListener("change", (event) => {
+    const color = event.target.value;
+    if (color === "blue") {
+        changeStyleVar("--link", "#007BFF");
+    }
+    if (color === "green") {
+        changeStyleVar("--link", "#28a745");
+    }
+    if (color === "purple") {
+        changeStyleVar("--link", "#6f42c1");
+    }
+});
+
+// Einde settings
 
 // Initialisatie
 if (isLoggedIn()) {

@@ -1,19 +1,19 @@
 /* CSS voor examentracker */
 :root {
     /* Kleuren */
-    --primary-navy: #1e3a5f;
-    --primary-navy-dark: #152a45;
-    --secondary-gray: #5a7c8c;
-    --secondary-gray-light: #6a8c9c;
-    --secondary-gray-lighter: #7a92a8;
-    --accent-light: #8ba3b5;
-    --paper-white: #f5f4f0;
-    --paper-cream: #faf9f5;
+    --primary-color: #1e3a5f;
+    --primary-color-dark: #152a45;
+    --secondary-color: #5a7c8c;
+    --secondary-color-light: #6a8c9c;
+    --secondary-color-lighter: #7a92a8;
+    --accent: #8ba3b5;
+    --background-color: #f5f4f0;
+    --background-color-light: #faf9f5;
     --error-red: #c23b3b;
     --error-red-dark: #a02a2a;
     --error-red-light: #d04747;
     --white: #ffffff;
-    --link-blue: #007BFF;
+    --link: #007BFF;
 
     /* Shadows */
     --shadow-light: 0 2px 8px rgba(30, 58, 95, 0.1);
@@ -47,12 +47,12 @@
     --font-size-3xl: 2.5em;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(180deg, var(--primary-navy) 0%, var(--primary-navy-dark) 100%);
-    --gradient-secondary: linear-gradient(180deg, var(--secondary-gray-lighter) 0%, var(--secondary-gray) 100%);
+    --gradient-primary: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
+    --gradient-secondary: linear-gradient(180deg, var(--secondary-color-lighter) 0%, var(--secondary-color) 100%);
     --gradient-input: linear-gradient(180deg, var(--white) 0%, #f9f8f5 100%);
-    --gradient-background: linear-gradient(135deg, #e8e7e1 0%, var(--paper-white) 100%);
+    --gradient-background: linear-gradient(135deg, #e8e7e1 0%, var(--background-color) 100%);
     --gradient-light-bg: linear-gradient(135deg, #e8eef5 0%, #f0f5fa 100%);
-    --gradient-paper: linear-gradient(180deg, var(--white) 0%, var(--paper-white) 100%);
+    --gradient-paper: linear-gradient(180deg, var(--white) 0%, var(--background-color) 100%);
     --gradient-error: linear-gradient(180deg, var(--error-red) 0%, var(--error-red-dark) 100%);
 }
 
@@ -66,7 +66,7 @@
 
 body {
     background: var(--gradient-background);
-    color: var(--primary-navy);
+    color: var(--primary-color);
     padding: var(--spacing-2xl);
     min-height: 100vh;
 }
@@ -75,7 +75,7 @@ body {
 
 h1 {
     font-size: var(--font-size-3xl);
-    color: var(--primary-navy);
+    color: var(--primary-color);
     text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
     margin-bottom: var(--spacing-md);
     letter-spacing: 1px;
@@ -83,8 +83,8 @@ h1 {
 
 h2 {
     font-size: var(--font-size-2xl);
-    color: var(--primary-navy);
-    border-bottom: 2px solid var(--accent-light);
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--accent);
     padding-bottom: var(--spacing-md);
     margin-top: var(--spacing-2xl);
     margin-bottom: var(--spacing-xl);
@@ -94,8 +94,8 @@ h2 {
 
 h3 {
     font-size: var(--font-size-lg);
-    color: var(--primary-navy);
-    border-bottom: 2px solid var(--accent-light);
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--accent);
     padding-bottom: var(--spacing-md);
     margin-top: var(--spacing-2xl);
     margin-bottom: var(--spacing-xl);
@@ -104,18 +104,18 @@ h3 {
 p {
     line-height: 1.6;
     margin-bottom: var(--spacing-lg);
-    color: var(--primary-navy);
+    color: var(--primary-color);
 }
 
 a {
-    color: var(--link-blue);
+    color: var(--link);
     text-decoration: none;
 }
 
 hr {
     border: none;
     height: 2px;
-    background: linear-gradient(90deg, transparent 0%, var(--accent-light) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
     margin: var(--spacing-2xl) 0;
 }
 
@@ -124,7 +124,7 @@ hr {
 #app {
     max-width: 900px;
     margin: 0 auto;
-    background: var(--paper-cream);
+    background: var(--background-color-light);
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-deep),
                 var(--shadow-inset-highlight),
@@ -164,8 +164,8 @@ hr {
 .footer {
     text-align: center;
     padding: var(--spacing-2xl);
-    border-top: 1px solid var(--accent-light);
-    color: var(--secondary-gray);
+    border-top: 1px solid var(--accent);
+    color: var(--secondary-color);
     font-size: var(--font-size-sm);
     background: var(--gradient-paper);
 }
@@ -202,7 +202,7 @@ button:active {
 }
 
 #back-button:hover {
-    background: linear-gradient(180deg, var(--secondary-gray-light) 0%, var(--secondary-gray-lighter) 100%);
+    background: linear-gradient(180deg, var(--secondary-color-light) 0%, var(--secondary-color-lighter) 100%);
 }
 
 #exam-form button,
@@ -241,11 +241,11 @@ select {
     width: 100%;
     box-sizing: border-box;
     background: var(--gradient-input);
-    border: 2px solid var(--accent-light);
+    border: 2px solid var(--accent);
     padding: var(--spacing-md) var(--spacing-lg);
     border-radius: var(--radius-md);
     font-size: var(--font-size-base);
-    color: var(--primary-navy);
+    color: var(--primary-color);
     transition: all 0.2s ease;
     box-shadow: var(--shadow-inset);
     margin: var(--spacing-sm) 0;
@@ -257,7 +257,7 @@ input[type="password"]:focus,
 input[type="text"]:focus,
 select:focus {
     outline: none;
-    border-color: var(--primary-navy);
+    border-color: var(--primary-color);
     box-shadow:
         var(--shadow-inset),
         0 0 0 3px rgba(30, 58, 95, 0.1);
@@ -279,7 +279,7 @@ input[type="checkbox"] {
     height: 20px;
     margin-right: var(--spacing-xl);
     cursor: pointer;
-    accent-color: var(--primary-navy);
+    accent-color: var(--primary-color);
 }
 
 #weakness-input {
@@ -289,10 +289,10 @@ input[type="checkbox"] {
 }
 
 #exam-form {
-    background: linear-gradient(180deg, #f9f8f5 0%, #f0ede8 100%);
+    background: linear-gradient(180deg, var(--background-color-light) 0%, var(--background-color) 100%);
     padding: var(--spacing-2xl);
     border-radius: var(--radius-lg);
-    border: 2px solid var(--accent-light);
+    border: 2px solid var(--accent);
     margin: var(--spacing-2xl) 0;
     box-shadow: var(--shadow-light);
 }
@@ -307,7 +307,7 @@ li {
     background: var(--gradient-paper);
     margin: var(--spacing-md) 0;
     padding: var(--spacing-xl);
-    border-left: 4px solid var(--primary-navy);
+    border-left: 4px solid var(--primary-color);
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-light);
     transition: all 0.2s ease;
@@ -343,7 +343,7 @@ li:hover {
     padding: var(--spacing-lg) var(--spacing-xl);
     margin: var(--spacing-sm) 0;
     background: var(--gradient-paper);
-    border-left: 4px solid var(--secondary-gray);
+    border-left: 4px solid var(--secondary-color);
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-light);
 }
@@ -351,12 +351,12 @@ li:hover {
 #exam-list li:hover,
 #weaknesses-list li:hover {
     box-shadow: var(--shadow-medium);
-    border-left-color: var(--primary-navy);
+    border-left-color: var(--primary-color);
 }
 
 #weaknesses-list span {
     flex: 1;
-    color: var(--primary-navy);
+    color: var(--primary-color);
 }
 
 /* ===== VAKKENGEDEELTE ===== */
@@ -373,12 +373,12 @@ li:hover {
 
 #total-progress {
     background: var(--gradient-light-bg);
-    border: 2px solid var(--accent-light);
+    border: 2px solid var(--accent);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
     margin: var(--spacing-2xl) 0;
     font-weight: bold;
-    color: var(--primary-navy);
+    color: var(--primary-color);
     position: relative;
     box-shadow: var(--shadow-inset),
                 var(--shadow-light);
@@ -392,25 +392,25 @@ li:hover {
 
 #progress {
     background: var(--gradient-paper);
-    border-left: 4px solid var(--primary-navy);
+    border-left: 4px solid var(--primary-color);
     padding: var(--spacing-md) var(--spacing-xl);
     border-radius: var(--radius-sm);
     display: inline-block;
     margin: var(--spacing-md) 0;
     box-shadow: var(--shadow-light);
     font-weight: bold;
-    color: var(--primary-navy);
+    color: var(--primary-color);
 }
 
 #target-grade {
     background: var(--gradient-light-bg);
-    border: 2px solid var(--accent-light);
+    border: 2px solid var(--accent);
     padding: var(--spacing-lg) var(--spacing-2xl);
     border-radius: var(--radius-lg);
     display: inline-block;
     font-size: var(--font-size-xl);
     font-weight: bold;
-    color: var(--primary-navy);
+    color: var(--primary-color);
     box-shadow: var(--shadow-inset);
     margin: var(--spacing-md) 0;
 }
@@ -419,7 +419,7 @@ li:hover {
     margin: var(--spacing-3xl) 0;
     padding: var(--spacing-2xl);
     background: var(--gradient-paper);
-    border: 2px solid var(--accent-light);
+    border: 2px solid var(--accent);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-light),
                 var(--shadow-inset-highlight);
@@ -451,7 +451,7 @@ canvas {
 }
 
 #links a:hover {
-    background: linear-gradient(180deg, var(--secondary-gray-light) 0%, var(--secondary-gray-lighter) 100%);
+    background: linear-gradient(180deg, var(--secondary-color-light) 0%, var(--secondary-color-lighter) 100%);
     transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
 }
@@ -459,7 +459,7 @@ canvas {
 /* ===== VERSIE ===== */
 
 .version-element {
-    color: var(--secondary-gray);
+    color: var(--secondary-color);
     font-size: var(--font-size-sm);
     opacity: 0.7;
     margin-left: var(--spacing-md);
@@ -473,7 +473,7 @@ canvas {
 }
 
 #select-method {
-    background: var(--paper-cream);
+    background: var(--background-color-light);
     border-radius: var(--radius-full);
     padding: var(--spacing-3xl);
     box-shadow: var(--shadow-deep),
@@ -525,7 +525,7 @@ canvas {
 
 #login,
 #signup {
-    background: var(--paper-cream);
+    background: var(--background-color-light);
     border-radius: var(--radius-full);
     padding: var(--spacing-3xl);
     box-shadow: var(--shadow-deep),
@@ -586,4 +586,30 @@ canvas {
 #signup .login-button {
     width: 100%;
     margin-top: var(--spacing-md);
+}
+
+/* ===== INSTELLINGEN UI ===== */
+#settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#settings {
+    background: var(--background-color-light);
+    border-radius: var(--radius-full);
+    padding: var(--spacing-3xl);
+    box-shadow: var(--shadow-deep),
+                var(--shadow-inset-highlight),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
 }
