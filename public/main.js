@@ -613,11 +613,13 @@ for (const button of logoutButtons) {
 // Settings menu openen
 document.getElementById("settings-button").addEventListener("click", () => {
     document.getElementById("settings-overlay").style.display = "block";
+    document.getElementById("settings-button").style.display = "none";
 });
 
 // Settings menu sluiten
 document.getElementById("close-settings").addEventListener("click", () => {
     document.getElementById("settings-overlay").style.display = "none";
+    document.getElementById("settings-button").style.display = "block";
 });
 
 // Einde settings

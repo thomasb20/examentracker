@@ -610,4 +610,6 @@ canvas {
                 var(--shadow-inset-highlight),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.05);
     position: relative;
+    max-width: 500px;
+    margin: 0 auto;
 }
