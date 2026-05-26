@@ -8,6 +8,25 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js voor de cijfergrafiek -->
 </head>
 <body>
+<button id="settings-button" style="position:fixed; top:20px; left:20px; padding:5px 15px;font-size:1rem;">Instellingen</button>
+<div id="settings-overlay" style="display:none;">
+    <div id="settings">
+        <h2>Instellingen</h2>
+        <label for="background-color-select">Achtergrondkleur:</label>
+        <select id="background-color-select">
+            <option value="light">Licht</option>
+            <option value="dark">Donker</option>
+            <option value="blue">Blauw</option>
+        </select>
+        <label for="button-color-select">Knoppenkleur:</label>
+        <select id="button-color-select">
+            <option value="gray">Grijs</option>
+            <option value="black">Zwart</option>
+            <option value="blue">Blauw</option>
+        </select>
+        <button id="close-settings">Sluiten</button>
+    </div>
+</div>
 <div id="start">
     <div id="select-method">
         <h1>Welkom bij de Examentracker.</h1>

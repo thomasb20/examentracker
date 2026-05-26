@@ -587,3 +587,27 @@ canvas {
     width: 100%;
     margin-top: var(--spacing-md);
 }
+
+/* ===== INSTELLINGEN UI ===== */
+#settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#settings {
+    background: var(--paper-cream);
+    border-radius: var(--radius-full);
+    padding: var(--spacing-3xl);
+    box-shadow: var(--shadow-deep),
+                var(--shadow-inset-highlight),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    position: relative;
+}

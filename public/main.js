@@ -609,6 +609,19 @@ for (const button of logoutButtons) {
     button.addEventListener("click", logout);
 }
 
+// Settings
+// Settings menu openen
+document.getElementById("settings-button").addEventListener("click", () => {
+    document.getElementById("settings-overlay").style.display = "block";
+});
+
+// Settings menu sluiten
+document.getElementById("close-settings").addEventListener("click", () => {
+    document.getElementById("settings-overlay").style.display = "none";
+});
+
+// Einde settings
+
 // Initialisatie
 if (isLoggedIn()) {
     showApp();
