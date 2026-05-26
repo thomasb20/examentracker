@@ -622,23 +622,6 @@ document.getElementById("close-settings").addEventListener("click", () => {
     document.getElementById("settings-button").style.display = "block";
 });
 
-// Achtergrondkleur veranderen
-document.getElementById("background-color-select").addEventListener("change", (event) => {
-    const color = event.target.value;
-    if (color === "light") {
-        changeStyleVar("--background-color", "#f0ede8");
-        changeStyleVar("--background-color-light", "#f9f8f5");
-    }
-    if (color === "dark") {
-        changeStyleVar("--background-color", "#1e1e1e");
-        changeStyleVar("--background-color-light", "#2e2e2e");
-    }
-    if (color === "blue") {
-        changeStyleVar("--background-color", "#1e3a5f");
-        changeStyleVar("--background-color-light", "#2e4a6f");
-    }
-});
-
 // Primaire kleur veranderen
 document.getElementById("primary-color-select").addEventListener("change", (event) => {
     const color = event.target.value;
@@ -680,13 +663,13 @@ document.getElementById("secondary-color-select").addEventListener("change", (ev
 document.getElementById("link-color-select").addEventListener("change", (event) => {
     const color = event.target.value;
     if (color === "blue") {
-        changeStyleVar("--link-color", "#007BFF");
+        changeStyleVar("--link", "#007BFF");
     }
     if (color === "green") {
-        changeStyleVar("--link-color", "#28a745");
+        changeStyleVar("--link", "#28a745");
     }
     if (color === "purple") {
-        changeStyleVar("--link-color", "#6f42c1");
+        changeStyleVar("--link", "#6f42c1");
     }
 });
 
