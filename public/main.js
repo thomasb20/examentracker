@@ -2,6 +2,7 @@
 
 // Constanten
 const SUBJECTS = ["Wiskunde B", "Nederlands", "Engels", "Biologie", "Natuurkunde", "Scheikunde", "Latijn", "Duits"];
+const ROOT_ELEMENT = document.querySelector(':root'); // Root element: hiermee kunnen we CSS-variabelen aanpassen.
 
 // Helpers
 function calculateTargetGrade(seGrade) {
@@ -62,6 +63,12 @@ async function authenticatedFetch(endpoint, options = {}) {
     }
 
     return response;
+}
+
+// CSS-variabele aanpassen
+function changeStyleVar(variable, value) {
+  console.log(`CSS variabele ${variable} aangepast naar ${value}.`);
+  ROOT_ELEMENT.style.setProperty(variable, value);
 }
 
 // Einde helpers
