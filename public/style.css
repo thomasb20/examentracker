@@ -7,8 +7,8 @@
     --secondary-color-light: #6a8c9c;
     --secondary-color-lighter: #7a92a8;
     --accent: #8ba3b5;
-    --paper-white: #f5f4f0;
-    --paper-cream: #faf9f5;
+    --background-color: #f5f4f0;
+    --background-color-light: #faf9f5;
     --error-red: #c23b3b;
     --error-red-dark: #a02a2a;
     --error-red-light: #d04747;
@@ -50,9 +50,9 @@
     --gradient-primary: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
     --gradient-secondary: linear-gradient(180deg, var(--secondary-color-lighter) 0%, var(--secondary-color) 100%);
     --gradient-input: linear-gradient(180deg, var(--white) 0%, #f9f8f5 100%);
-    --gradient-background: linear-gradient(135deg, #e8e7e1 0%, var(--paper-white) 100%);
+    --gradient-background: linear-gradient(135deg, #e8e7e1 0%, var(--background-color) 100%);
     --gradient-light-bg: linear-gradient(135deg, #e8eef5 0%, #f0f5fa 100%);
-    --gradient-paper: linear-gradient(180deg, var(--white) 0%, var(--paper-white) 100%);
+    --gradient-paper: linear-gradient(180deg, var(--white) 0%, var(--background-color) 100%);
     --gradient-error: linear-gradient(180deg, var(--error-red) 0%, var(--error-red-dark) 100%);
 }
 
@@ -124,7 +124,7 @@ hr {
 #app {
     max-width: 900px;
     margin: 0 auto;
-    background: var(--paper-cream);
+    background: var(--background-color-light);
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-deep),
                 var(--shadow-inset-highlight),
@@ -289,7 +289,7 @@ input[type="checkbox"] {
 }
 
 #exam-form {
-    background: linear-gradient(180deg, #f9f8f5 0%, #f0ede8 100%);
+    background: linear-gradient(180deg, var(--background-color-light) 0%, var(--background-color) 100%);
     padding: var(--spacing-2xl);
     border-radius: var(--radius-lg);
     border: 2px solid var(--accent);
@@ -473,7 +473,7 @@ canvas {
 }
 
 #select-method {
-    background: var(--paper-cream);
+    background: var(--background-color-light);
     border-radius: var(--radius-full);
     padding: var(--spacing-3xl);
     box-shadow: var(--shadow-deep),
@@ -525,7 +525,7 @@ canvas {
 
 #login,
 #signup {
-    background: var(--paper-cream);
+    background: var(--background-color-light);
     border-radius: var(--radius-full);
     padding: var(--spacing-3xl);
     box-shadow: var(--shadow-deep),
@@ -603,7 +603,7 @@ canvas {
 }
 
 #settings {
-    background: var(--paper-cream);
+    background: var(--background-color-light);
     border-radius: var(--radius-full);
     padding: var(--spacing-3xl);
     box-shadow: var(--shadow-deep),
