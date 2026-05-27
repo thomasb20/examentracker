@@ -1,5 +1,5 @@
 # Examentracker
-![T-Site.nl](https://img.shields.io/badge/T--Site.nl-blue?style=plastic&logo=cloudflareworkers&logoColor=black&link=https%3A%2F%2Fwww.t-site.nl%2Fexamentracker%2F)
+[![T-Site.nl](https://img.shields.io/badge/T--Site.nl-blue?style=plastic&logo=cloudflareworkers&logoColor=black&link=https%3A%2F%2Fwww.t-site.nl%2Fexamentracker%2F)](https://t-site.nl/examentracker)
 
 Een Examentracker om voor de examens te leren.
 Gemaakt met HTML, CSS en Javascript en gehost met Cloudflare Workers.
