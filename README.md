@@ -4,7 +4,7 @@
 Een Examentracker om voor de examens te leren.
 Gemaakt met HTML, CSS en Javascript en gehost met Cloudflare Workers.
 # Gebruiken
-- Maak een oud eindexamen. Ga naar [https://www.alleexamens.nl](alleexamens.nl) en maak een examen. Doe alsof het een echt examen is.
+- Maak een oud eindexamen. Ga naar [alleexamens.nl](https://www.alleexamens.nl) en maak een examen. Doe alsof het een echt examen is.
 - Kijk het na en bekijk je cijfer.
 - Vul dit in bij de Examentracker.
 - Schrijf op waar je de meeste fouten maakte. Hier kun je later dan van leren.
@@ -12,8 +12,8 @@ Gemaakt met HTML, CSS en Javascript en gehost met Cloudflare Workers.
 
 ## Moeilijk onderwerp?
 - Focus op je zwakke punten.
-- Met [https://www.examen-centraal.nl](examen-centraal.nl) kun je per onderwerp examenvragen maken.
-- Bij [https://www.alleexamens.nl](alleexamens.nl) kun je op de knop "Opgaven + Bijlagen" drukken. Dan krijg je ALLE examenopgaven van de afgelopen 26 jaar! Gebruik dan CTRL + F om te zoeken op specifieke woorden.
+- Met [examen-centraal.nl](https://www.examen-centraal.nl) kun je per onderwerp examenvragen maken.
+- Bij [alleexamens.nl](https://www.alleexamens.nl) kun je op de knop "Opgaven + Bijlagen" drukken. Dan krijg je ALLE examenopgaven van de afgelopen 26 jaar! Gebruik dan CTRL + F om te zoeken op specifieke woorden.
 - Kijk uitlegvideo's als je iets écht niet snapt.
 
 ## Planning
